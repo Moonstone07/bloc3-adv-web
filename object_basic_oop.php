@@ -1,43 +1,40 @@
 <?php
 
-// error displaying
+// Enable error displaying
 ini_set('display_errors', 1);
 
-class switchConsole
+// Define a class called SwitchConsole
+class SwitchConsole
 {
-    public $name;
+    // Define public properties for the console's name, color, and joycon status
+    public $name; // this is a field
     public $color;
     public $joyconStatus;
-
-    public function detachJoycons()
-    {
-        if($this->joyconStatus != true)
-        {
-            echo "Joycons are now detached";
-        }
-    }
-
-    public function attachJoycons()
-    {
-        if($this->joyconStatus == true)
-        {
-            echo "Joycons are already attached";
-        }
-    } 
 
     function __construct($name, $color, $joyconStatus)
     {
         $this->name = $name;
         $this->color = $color;
         $this->joyconStatus = $joyconStatus;
-
     }
+
+    public function attachedJoycons()
+    {
+        if ($this->joyconStatus == true || $this->joyconStatus != true)
+        {
+            echo "Joycons are already attached";
+        } else {
+            echo "Joycons are not attached";
+        }
+    }
+
 }
 
-$switch = new switchConsole("Switch", "blue" , false);
+$switch = new SwitchConsole("Switch", "blue", false);
 
 echo $switch->name;
 echo "<br>";
 echo $switch->color;
 echo "<br>";
-echo $switch->joyconStatus;
+echo $switch->attachedJoycons();
+echo "<br>";
