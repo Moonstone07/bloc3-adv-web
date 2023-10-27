@@ -11,6 +11,7 @@ class SwitchConsole
     public $color;
     public $joyconStatus;
     private $gamesInserted = false;
+    private $powerStatus = false;
 
     function __construct($name, $color, $joyconStatus, $gamesInserted)
     {
@@ -19,6 +20,18 @@ class SwitchConsole
         $this->joyconStatus = $joyconStatus;
         $this->gamesInserted = $gamesInserted;
     }
+
+    public function powerOn()
+    {
+        if (!$this->powerStatus) {
+            echo "turning on";
+            $this->powerStatus = true; // sets the power status to true indicating power is on
+        } else {
+            //if power status is true then power is off
+            echo "Power is off";
+        }
+    }
+
 
     public function attachedJoycons()
     {
@@ -49,3 +62,5 @@ echo "<br>";
 echo $switch->attachedJoycons();
 echo "<br>";
 echo $switch->insertGame();
+echo "<br>";
+echo $switch->powerOn();
