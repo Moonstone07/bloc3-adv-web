@@ -10,6 +10,7 @@ class SwitchConsole
     public $name; // this is a field
     public $color;
     public $joyconStatus;
+    // Define private properties for the console's games inserted status and power status
     private $gamesInserted = false;
     private $powerStatus = false;
 
@@ -31,8 +32,7 @@ class SwitchConsole
             echo "Power is off";
         }
     }
-
-
+    
     public function attachedJoycons()
     {
         if ($this->joyconStatus == true) {
