@@ -10,27 +10,37 @@ class SwitchConsole
     public $name; // this is a field
     public $color;
     public $joyconStatus;
+    private $gamesInserted = false;
 
-    function __construct($name, $color, $joyconStatus)
+    function __construct($name, $color, $joyconStatus, $gamesInserted)
     {
         $this->name = $name;
         $this->color = $color;
         $this->joyconStatus = $joyconStatus;
+        $this->gamesInserted = $gamesInserted;
     }
 
     public function attachedJoycons()
     {
-        if ($this->joyconStatus == true || $this->joyconStatus != true)
-        {
+        if ($this->joyconStatus == true) {
             echo "Joycons are already attached";
         } else {
             echo "Joycons are not attached";
         }
     }
 
+    public function insertGame()
+    {
+        if (!$this->gamesInserted) {
+            echo "Game is already inserted";
+        } else {
+            echo "Game is not inserted";
+        }
+        return $this->gamesInserted;
+    }
 }
 
-$switch = new SwitchConsole("Switch", "blue", false);
+$switch = new SwitchConsole("Switch", "blue", false, false);
 
 echo $switch->name;
 echo "<br>";
@@ -38,3 +48,4 @@ echo $switch->color;
 echo "<br>";
 echo $switch->attachedJoycons();
 echo "<br>";
+echo $switch->insertGame();
