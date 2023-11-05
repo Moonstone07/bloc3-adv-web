@@ -1,4 +1,5 @@
 <?php
+
 // Enable error displaying
 ini_set('display_errors', 1);
 
