@@ -89,7 +89,31 @@ class HRManager extends Employee
 
 
 // Write a php class known as "BankAccount" with methods called deposit() and withdraw(). Create a subclass called SavingsAccount that overrides the withdraw() method to prevent withdrawals if the account balance falls below one hundred.
+class BankAccount
+{
+    protected $balance;
+    public function deposit()
+    {
 
+    }
+
+    public function withdraw()
+    {
+
+    }
+}
+
+class SavingsAccount extends BankAccount
+{
+    public function withdraw()
+    {
+        if ($this->balance < 100) {
+            echo "Cannot withdraw";
+        } else {
+            echo "Withdrawing";
+        }
+    }
+}
 
 
 // Write a php class called Animal with a method named move(). Create a subclass called Cheetah that overrides the move() method to run.
