@@ -1,0 +1,30 @@
+@startuml PetStore
+
+class PetSpecies {
+    - ID
+    - Name
+
+    ' __construct()
+    ' getName()
+    ' getSpeciesInfo()
+}
+
+class PetBreed {
+    - ID
+    - SpeciesID
+    - Name
+    - Mixed/Pure 
+    - Price 
+    ' is the price dependent on the breed alone or also the specie. Because a cat doesn't have the same price as a dog, same for a bird.
+}
+
+class Toy {
+    - ID
+    - Name
+    - SuitableSpecies
+    - Price
+}
+
+PetSpecies --> PetBreed : has
+PetSpecies --> Toy : may have
+@enduml
