@@ -1,30 +1,74 @@
 @startuml PetStore
 
 class PetSpecies {
-    - ID
-    - Name
+    - SpeciesID
+    - SpeciesName
+    - SpeciesPrice
 
-    ' __construct()
-    ' getName()
-    ' getSpeciesInfo()
+    + __construct($SpeciesID, $SpeciesName, $SpeciesPrice)
+
+        $this->SpeciesID = $SpeciesID;
+        $this->SpeciesName = $SpeciesName;
+        $this->SpeciesPrice = $SpeciesPrice;
+
+    + getSpeciesID()
+    + getSpeciesName()
+    + getSpeciesPrice()
+    + setSpeciesID($SpeciesID)
+    + setSpeciesName($SpeciesName)
+    + setSpeciesPrice($SpeciesPrice)
 }
 
 class PetBreed {
-    - ID
+    - BreedID
     - SpeciesID
-    - Name
-    - Mixed/Pure 
+    - BreedName
+    - MixedPureIndicator 
     - Price 
-    ' is the price dependent on the breed alone or also the specie. Because a cat doesn't have the same price as a dog, same for a bird.
+
+    + __construct($BreedID, $SpeciesID, $BreedName, $MixedPureIndicator, $Price)
+
+    $this->BreedID = $BreedID;
+    $this->SpeciesID = $SpeciesID;
+    $this->BreedName = $BreedName;
+    $this->MixedPureIndicator = $MixedPureIndicator;
+    $this->Price = $Price;
+
+    + getBreedID()
+    + getSpeciesID()
+    + getBreedName()
+    + getMixedPureIndicator()
+    + getPrice()
+    + setBreedID($BreedID)
+    + setSpeciesID($SpeciesID)
+    + setBreedName($BreedName)
+    + setMixedPureIndicator($MixedPureIndicator)
+    + setPrice($Price)
+
 }
 
 class Toy {
-    - ID
-    - Name
+    - ToyID
+    - ToyName
     - SuitableSpecies
     - Price
+
+    + __construct($ToyID, $ToyName, $SuitableSpecies, $Price)
+
+    $this->ToyID = $ToyID;
+    $this->ToyName = $ToyName;
+    $this->SuitableSpecies = $SuitableSpecies;
+    $this->Price = $Price;
+
+    + getToyID()
+    + getToyName()
+    + getSuitableSpecies()
+    + getPrice()
+    + setToyID($ToyID)
+    + setToyName($ToyName)
+    + setSuitableSpecies($SuitableSpecies)
+    + setPrice($Price)
 }
 
-PetSpecies --> PetBreed : has
-PetSpecies --> Toy : may have
+
 @enduml

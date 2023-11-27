@@ -1,0 +1,39 @@
+@startuml
+
+class pet_species{
+    - SpeciesID: int
+    - SpeciesName: string
+}
+
+class pet_breed{
+    - BreedID: int
+    - BreedName: string
+    - SpeciesID: int
+}
+
+
+class pet_toy{
+    - ToyID: int
+    - ToyName: string
+    - SuitableSpecies: int
+    - Price: decimal
+}
+
+pet_species --> pet_breed : has
+' the pet_species has a pet_breed
+pet_species --> pet_toy : may have 
+' the pet_species may have a pet_toy
+
+
+
+    ' is the price dependent on the breed alone or also the species? Because a cat doesn't have the same price as a dog, same for a bird.
+
+    ' I would have a table for the species and a table for the breed. The breed table would have a foreign key to the species table.
+
+    ' The breed table would have a price field. The species table would have a price field. The price field in the species table would be the base price.
+
+    ' The price field in the breed table would be the price of the breed. The price of the breed would be the base price plus the price of the breed.
+
+    ' In the database design, you might have pricing tables that store base prices for each species and additional tables or fields that accommodate variations in pricing based on breeds within each species. This would allow for a more nuanced representation of pricing for toys or pets based on their species and breed.
+
+@enduml
