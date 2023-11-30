@@ -1,5 +1,16 @@
 @startuml
 
+class pets{
+    - PetID: int
+    - PetName: string
+    - Pet_species: int
+    - Pet_breed: int
+    - Pet_age: int
+    - Pet_color: string
+    - PetPrice: int
+
+}
+
 class pet_species{
     - SpeciesID: int
     - SpeciesName: string
@@ -16,9 +27,13 @@ class pet_toy{
     - ToyID: int
     - ToyName: string
     - SuitableSpecies: int
-    - Price: decimal
+    - Price: int
 }
 
+pets --> pet_species : has
+' the pets has a pet_species
+pets --> pet_breed : has
+' the pets has a pet_breed
 pet_species --> pet_breed : has
 ' the pet_species has a pet_breed
 pet_species --> pet_toy : may have 
