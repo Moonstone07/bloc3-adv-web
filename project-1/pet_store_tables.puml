@@ -6,8 +6,9 @@ class pets{
     - Pet_species: int
     - Pet_breed: int
     - Pet_age: int
+    - Pet_gender: int
     - Pet_color: string
-    - PetPrice: int
+
 
 }
 
@@ -32,8 +33,6 @@ class pet_toy{
 
 pets --> pet_species : has
 ' the pets has a pet_species
-pets --> pet_breed : has
-' the pets has a pet_breed
 pet_species --> pet_breed : has
 ' the pet_species has a pet_breed
 pet_species --> pet_toy : may have 
