@@ -1,33 +1,33 @@
 <?php
 
-// ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-class connectionDA
+class ConnectionDA
 {
     public function __construct(public $host, public $username, public $password, public $dbname)
     {
     }
 }
 
-class petModel
+class PetModel
 {
     private $mysqli;
-    private $connectionDA;
-    public function __construct($connectionDA)
+    private $ConnectionDA;
+    public function __construct($ConnectionDA)
     {
-        $this->connectionDA = $connectionDA;
+        $this->ConnectionDA = $ConnectionDA;
     }
 
     public function connect()
     {
         try {
             $mysqli = new mysqli(
-                $this->connectionDA->host, 
-                $this->connectionDA->username, 
-                $this->connectionDA->password, 
-                $this->connectionDA->dbname
+                $this->ConnectionDA->host, 
+                $this->ConnectionDA->username, 
+                $this->ConnectionDA->password, 
+                $this->ConnectionDA->dbname
             );
 
             if ($mysqli->connect_error) {
@@ -44,7 +44,7 @@ class petModel
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            $result = $mysqli->query("SELECT * FROM pet");
+            $result = $mysqli->query("SELECT * FROM pets");
             while ($row = $result->fetch_assoc()) {
                 $results[] = $row;
             }
@@ -57,15 +57,15 @@ class petModel
 
 
     // insert a new pet into the database
-    public function insertPet($name, $age, $gender, $color)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $mysqli->query("INSERT INTO pet (name, age, gender, color) VALUES ('$name', '$age', '$gender', '$color')");
-            $mysqli->close();
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // public function insertPet($name, $age, $gender, $color)
+    // {
+    //     $mysqli = $this->connect();
+    //     if ($mysqli) {
+    //         $mysqli->query("INSERT INTO pet (name, age, gender, color) VALUES ('$name', '$age', '$gender', '$color')");
+    //         $mysqli->close();
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 }
