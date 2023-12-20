@@ -44,9 +44,13 @@ class PetController
         $this->displayPets();
     }
 }
-
+include_once 'controllers/config.php';
 $connect2DA = new ConnectionDA
-("localhost", "tischa_79", "4O37z~bf2", "tischa_pet_store");
+(
+    $host ,
+    $username,
+    $password ,
+    $dbname );
 
 $controller = new PetController($connect2DA);
 
