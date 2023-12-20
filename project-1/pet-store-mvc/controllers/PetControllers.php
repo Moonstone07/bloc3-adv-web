@@ -54,6 +54,7 @@ $controller = new PetController($connect2DA);
 
 if (isset($_POST['submit'])) {
     $controller->addPet();
+    $controller->petForm();
 } else {
     $controller->petForm();
 }
