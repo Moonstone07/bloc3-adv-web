@@ -39,6 +39,7 @@ class PetModel
         }
     }
 
+
     // select all pets from the database
     public function getPet()
     {
@@ -57,15 +58,21 @@ class PetModel
 
 
     // insert a new pet into the database
-    // public function insertPet($name, $age, $gender, $color)
-    // {
-    //     $mysqli = $this->connect();
-    //     if ($mysqli) {
-    //         $mysqli->query("INSERT INTO pet (name, age, gender, color) VALUES ('$name', '$age', '$gender', '$color')");
-    //         $mysqli->close();
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
+    public function insertPet($pet_Name, $pet_Gender, $pet_Age, $pet_Color)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            if ($mysqli->query("INSERT INTO pets (pet_Name, pet_Gender, pet_Age, pet_Color) VALUES ('$pet_Name', '$pet_Gender', '$pet_Age', '$pet_Color')") === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
+?>

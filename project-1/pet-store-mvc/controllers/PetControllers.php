@@ -1,8 +1,7 @@
 <?php
 
 ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+
 
 include_once 'models/model.php';
 
@@ -21,28 +20,29 @@ class PetController
         // return $pets;
     }
 
-    // public function petForm()
-    // {
-    //     include "views/petForm.php";
-    // }
+    public function petForm()
+    {
+        include "views/petForm.php";
+    }
 
-    // public function addPet(){
-    //     $name = $_POST['name'];
-    //     $age = $_POST['age'];
-    //     $gender = $_POST ['gender'];
-    //     $color = $_POST['color'];
+    public function addPet(){
+        // echo "addPet() method is called!";
+        $name = $_POST['name'];
+        $gender = $_POST ['gender'];
+        $age = $_POST['age'];
+        $color = $_POST['color'];
 
-    //     if(!$name || !$age || !$gender || !$color){
-    //         echo "Please fill out all fields";
-    //         $this->petForm();
-    //         return;
-    //     }elseif ($this->model->insertPet($name, $age, $gender, $color)){
-    //         echo "Pet added successfully";
-    //     } else {
-    //         echo "Error adding pet";
-    //     }
-    //     $this->displayPets();
-    // }
+        if(!$name || !$gender || !$age || !$color){
+            echo "Please fill out all fields";
+            $this->petForm();
+            return;
+        }elseif ($this->model->insertPet($name, $gender, $age, $color)){
+            echo "Pet added successfully: $name, $gender, $age, $color </br>";
+        } else {
+            echo "Error adding pet";
+        }
+        $this->displayPets();
+    }
 }
 
 $connect2DA = new ConnectionDA
@@ -50,12 +50,12 @@ $connect2DA = new ConnectionDA
 
 $controller = new PetController($connect2DA);
 
-$controller->displayPets();
+// $controller->displayPets();
 
-// if (isset($_POST['submit'])) {
-//     $controller->addPet();
-// } else {
-//     $controller->petForm();
-// }
+if (isset($_POST['submit'])) {
+    $controller->addPet();
+} else {
+    $controller->petForm();
+}
 
 ?>
