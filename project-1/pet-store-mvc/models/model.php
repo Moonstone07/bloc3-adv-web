@@ -41,16 +41,16 @@ class PetModel
 
 
     // select all pets from the database
-    public function getPet()
+    public function getSpeciesType()
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            $result = $mysqli->query("SELECT * FROM pets");
+            $result = $mysqli->query("SELECT * FROM pet_species");
             while ($row = $result->fetch_assoc()) {
                 $results[] = $row;
             }
             $mysqli->close();
-            return $results;
+            // return $results;
         } else {
             return false;
         }
@@ -58,11 +58,13 @@ class PetModel
 
 
     // insert a new pet into the database
-    public function insertPet($pet_Name, $pet_Gender, $pet_Age, $pet_Color)
+    public function insertSpeciesType($pet_species_type)
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            if ($mysqli->query("INSERT INTO pets (pet_Name, pet_Gender, pet_Age, pet_Color) VALUES ('$pet_Name', '$pet_Gender', '$pet_Age', '$pet_Color')") === TRUE) {
+            if ($mysqli->query("INSERT INTO pet_species (pet_species_type) 
+            
+            VALUES ('$pet_species_type')") === TRUE) {
                 $mysqli->close();
                 return true;
             } else {
@@ -76,3 +78,6 @@ class PetModel
     }
 }
 ?>
+
+
+<!-- create multiple selects for each tables and display all tables with parent table -->

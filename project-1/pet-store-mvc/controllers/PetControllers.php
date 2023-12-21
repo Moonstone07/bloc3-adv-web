@@ -2,7 +2,6 @@
 
 ini_set('display_errors', 1);
 
-
 include_once 'models/model.php';
 
 class PetController
@@ -13,9 +12,9 @@ class PetController
         $this->model = new PetModel($conn);
     }
 
-    public function displayPets()
+    public function displaySpeciesType()
     {
-        $pets = $this->model->getPet();
+        $species = $this->model->getSpeciesType();
         include "views/petView.php";
         // return $pets;
     }
@@ -25,23 +24,21 @@ class PetController
         include "views/petForm.php";
     }
 
-    public function addPet(){
-        // echo "addPet() method is called!";
-        $name = $_POST['name'];
-        $gender = $_POST ['gender'];
-        $age = $_POST['age'];
-        $color = $_POST['color'];
+    public function addSpeciesType(){
+        // $id = $_POST['id'];
+        $type = $_POST['type'];
 
-        if(!$name || !$gender || !$age || !$color){
+        if(!$type){
             echo "Please fill out all fields";
             $this->petForm();
             return;
-        }elseif ($this->model->insertPet($name, $gender, $age, $color)){
-            echo "Pet added successfully: $name, $gender, $age, $color </br>";
+        }elseif ($this->model->insertSpeciesType($type)){
+            echo "Pet type added successfully: $type";
         } else {
-            echo "Error adding pet";
+            echo "Error adding pet type";
+            $this->petForm();
         }
-        $this->displayPets();
+        $this->displaySpeciesType();
     }
 }
 include_once 'controllers/config.php';
@@ -54,10 +51,10 @@ $connect2DA = new ConnectionDA
 
 $controller = new PetController($connect2DA);
 
-// $controller->displayPets();
+// $controller->displaySpeciesType();
 
 if (isset($_POST['submit'])) {
-    $controller->addPet();
+    $controller->addSpeciesType();
     $controller->petForm();
 } else {
     $controller->petForm();
