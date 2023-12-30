@@ -12,13 +12,6 @@ class PetController
         $this->model = new PetModel($conn);
     }
 
-    public function displaySpeciesType()
-    {
-        $species = $this->model->getSpeciesType();
-        include "views/petView.php";
-        // return $pets;
-    }
-
     public function petForm()
     {
         include "views/petForm.php";
@@ -41,14 +34,24 @@ class PetController
         $this->displaySpeciesType();
     }
 
-    public function updateSpeciesType($id, $new_pet_species_type)
-    {
-        return $this->model->updateSpeciesType($id, $new_pet_species_type);
-    }
+    // public function updateSpeciesType($id, $new_pet_species_type)
+    // {
+    //     return $this->model->updateSpeciesType($id, $new_pet_species_type);
+    // }
 
-    public function deleteSpeciesType($id)
+    // public function deleteSpeciesType($id)
+    // {
+    //     return $this->model->deleteSpeciesType($id);
+    // }
+
+
+
+    public function displaySpeciesType()
     {
-        return $this->model->deleteSpeciesType($id);
+        $species = $this->model->getSpeciesType();
+         // var_dump($species);
+        include "views/petView.php";
+        // return $pets;
     }
 }
 
@@ -64,7 +67,7 @@ $connect2DA = new ConnectionDA(
 
 $controller = new PetController($connect2DA);
 
-// $controller->displaySpeciesType();
+$controller->displaySpeciesType();
 
 if (isset($_POST['submit'])) {
     $controller->addSpeciesType();
@@ -73,14 +76,12 @@ if (isset($_POST['submit'])) {
     $controller->petForm();
 }
 
-if (isset($_POST['update_id'])) {
-    $controller->updateSpeciesType($_POST['update_id'], $_POST['new_species_type']);
-    $controller->displaySpeciesType();
-}
+// if (isset($_POST['update_id'])) {
+//     $controller->updateSpeciesType($_POST['update_id'], $_POST['new_species_type']);
+// }
 
-if (isset($_POST['delete_id'])) {
-    $controller->deleteSpeciesType($_POST['delete_id']);
-    $controller->displaySpeciesType();
-}
+// if (isset($_POST['delete_id'])) {
+//     $controller->deleteSpeciesType($_POST['delete_id']);
+// }
 
 ?>
