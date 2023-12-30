@@ -1,0 +1,74 @@
+@startuml PetStore
+
+class PetSpecies {
+    - SpeciesID
+    - SpeciesName
+    - SpeciesPrice
+
+    + __construct($SpeciesID, $SpeciesName, $SpeciesPrice)
+
+        $this->SpeciesID = $SpeciesID;
+        $this->SpeciesName = $SpeciesName;
+        $this->SpeciesPrice = $SpeciesPrice;
+
+    + getSpeciesID()
+    + getSpeciesName()
+    + getSpeciesPrice()
+    + setSpeciesID($SpeciesID)
+    + setSpeciesName($SpeciesName)
+    + setSpeciesPrice($SpeciesPrice)
+}
+
+class PetBreed {
+    - BreedID
+    - SpeciesID
+    - BreedName
+    - MixedPureIndicator 
+    - Price 
+
+    + __construct($BreedID, $SpeciesID, $BreedName, $MixedPureIndicator, $Price)
+
+    $this->BreedID = $BreedID;
+    $this->SpeciesID = $SpeciesID;
+    $this->BreedName = $BreedName;
+    $this->MixedPureIndicator = $MixedPureIndicator;
+    $this->Price = $Price;
+
+    + getBreedID()
+    + getSpeciesID()
+    + getBreedName()
+    + getMixedPureIndicator()
+    + getPrice()
+    + setBreedID($BreedID)
+    + setSpeciesID($SpeciesID)
+    + setBreedName($BreedName)
+    + setMixedPureIndicator($MixedPureIndicator)
+    + setPrice($Price)
+
+}
+
+class Toy {
+    - ToyID
+    - ToyName
+    - SuitableSpecies
+    - Price
+
+    + __construct($ToyID, $ToyName, $SuitableSpecies, $Price)
+
+    $this->ToyID = $ToyID;
+    $this->ToyName = $ToyName;
+    $this->SuitableSpecies = $SuitableSpecies;
+    $this->Price = $Price;
+
+    + getToyID()
+    + getToyName()
+    + getSuitableSpecies()
+    + getPrice()
+    + setToyID($ToyID)
+    + setToyName($ToyName)
+    + setSuitableSpecies($SuitableSpecies)
+    + setPrice($Price)
+}
+
+
+@enduml
