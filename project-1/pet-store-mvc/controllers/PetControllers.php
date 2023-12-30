@@ -45,7 +45,6 @@ class PetController
     // }
 
 
-
     public function displaySpeciesType()
     {
         $species = $this->model->getSpeciesType();
