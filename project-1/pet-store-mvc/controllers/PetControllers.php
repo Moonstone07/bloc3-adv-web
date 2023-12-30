@@ -53,6 +53,9 @@ class PetController
         include "views/petView.php";
         // return $pets;
     }
+
+    /* the display function is not working, it is not displaying the pet species type only NULL. It was displaying the table before, but i tried deleting in phpmyadmin. I am not sure if that is the reason why it is not displaying the table.
+    */
 }
 
 
