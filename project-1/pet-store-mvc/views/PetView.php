@@ -1,7 +1,5 @@
 <?php
 
-
-
 if ($species) {
     echo "<table border='1'>";
     echo "<tr>

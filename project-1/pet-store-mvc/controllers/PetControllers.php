@@ -26,7 +26,7 @@ class PetController
         // return $pets;
     }
 
-    /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data will be displayed.
+    /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also displayed.
     */
 
 
