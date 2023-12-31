@@ -78,17 +78,17 @@ $controller->displaySpeciesType();
 
 if (isset($_POST['submit'])) {
     $controller->addSpeciesType();
-    $controller->petForm();
-} else {
-    $controller->petForm();
 }
 
-if (isset($_POST['update_id'])) {
-    $controller->updateSpeciesType($_POST['update_id'], $_POST['new_species_type']);
+// Calling petForm() only once regardless of whether 'submit' is set
+$controller->petForm();
+
+if (isset($update_id) && isset($new_species_type)) {
+    $controller->updateSpeciesType($update_id, $new_species_type);
 }
 
-if (isset($_POST['delete_id'])) {
-    $controller->deleteSpeciesType($_POST['delete_id']);
+if (isset($delete_id)) {
+    $controller->deleteSpeciesType($delete_id);
 }
 
 ?>
