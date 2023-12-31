@@ -77,44 +77,44 @@ class PetModel
         }
     }
 
-    // //update a species type
-    // public function updateSpeciesType($id, $new_pet_species_type)
-    // {
-    //     $mysqli = $this->connect();
-    //     if ($mysqli) {
-    //         $sql = "UPDATE pet_species SET pet_species_type = '$new_pet_species_type' WHERE pet_species_id = $id";
-    //         if ($mysqli->query($sql) === TRUE) {
-    //             $mysqli->close();
-    //             return true;
-    //         } else {
-    //             echo "Error: " . $mysqli->error;
-    //             $mysqli->close();
-    //             return false;
-    //         }
-    //     } else {
-    //         return false;
-    //     }
-    // }
+    //update a species type
+    public function updateSpeciesType($id, $new_pet_species_type)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "UPDATE pet_species SET pet_species_type = '$new_pet_species_type' WHERE pet_species_id = $id";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 
-    // //delete a species type
+    //delete a species type
 
-    // public function deleteSpeciesType($id)
-    // {
-    //     $mysqli = $this->connect();
-    //     if ($mysqli) {
-    //         $sql = "DELETE FROM pet_species WHERE pet_species_id = $id";
-    //         if ($mysqli->query($sql) === TRUE) {
-    //             $mysqli->close();
-    //             return true;
-    //         } else {
-    //             echo "Error: " . $mysqli->error;
-    //             $mysqli->close();
-    //             return false;
-    //         }
-    //     } else {
-    //         return false;
-    //     }
-    // }
+    public function deleteSpeciesType($id)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "DELETE FROM pet_species WHERE pet_species_id = $id";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
 ?>
 
