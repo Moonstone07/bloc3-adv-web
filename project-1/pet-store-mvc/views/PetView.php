@@ -28,12 +28,20 @@ if ($pets) {
     echo "<table border='1'>";
     echo "<tr>
         <th>ID</th>
-        <th>Species Type</th>
+        <th>name</th>
+        <th>age</th>
+        <th>color</th>
+        <th>breed</th>
+        <th>species</th>
         <th>Actions</th>
     </tr>";
     foreach ($pets as $pet) {
         echo "<td>" . $pet['pet_id'] . "</td>";
         echo "<td>" . $pet['pet_name'] . "</td>";
+        echo "<td>" . $pet['pet_age'] . "</td>";
+        echo "<td>" . $pet['pet_color'] . "</td>";
+        echo "<td>" . $pet['breed_id'] . "</td>";
+        echo "<td>" . $pet['species_id'] . "</td>";
         echo "<td>";
         include 'updateSpeciesTypeForm.php';
         include 'deleteSpeciesTypeForm.php';
