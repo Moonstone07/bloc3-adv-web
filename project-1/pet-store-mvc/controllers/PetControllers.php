@@ -26,10 +26,9 @@ class PetController
 
     public function displaySpeciesType()
     {
-        // $species = $this->model->getPet();
-        // var_dump($specie);
+        // $species = $this->speciesModel->getSpeciesType();
+        $pets = $this->model->getPet();
         include "views/petView.php";
-        // return $pets;
     }
 
     /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
