@@ -40,12 +40,12 @@ class PetModel
     }
 
 
-    // select all species type from the database to display
+    // select all pets from the database to display
     public function getPet()
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            $result = $mysqli->query("SELECT * FROM pet_species");
+            $result = $mysqli->query("SELECT * FROM pets");
             while ($row = $result->fetch_assoc()) {
                 $results[] = $row;
             }
@@ -57,14 +57,14 @@ class PetModel
     }
 
 
-    // insert a new species type into the database
-    public function insertPet($pet_species_type)
+    // insert a new pet into the database
+    public function insertPet($pets)
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            if ($mysqli->query("INSERT INTO pet_species (pet_species_type) 
+            if ($mysqli->query("INSERT INTO pets (pets) 
 
-            VALUES ('$pet_species_type')") === TRUE) {
+            VALUES ('$pets')") === TRUE) {
                 $mysqli->close();
                 return true;
             } else {
@@ -77,12 +77,12 @@ class PetModel
         }
     }
 
-    //update a species type
-    public function updatePet($id, $new_pet_species_type)
+    //update a pet name
+    public function updatePet($name, $new_pet_name)
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            $sql = "UPDATE pet_species SET pet_species_type = '$new_pet_species_type' WHERE pet_species_id = $id";
+            $sql = "UPDATE pets SET pet_name = '$new_pet_name' WHERE pet_name = $name";
             if ($mysqli->query($sql) === TRUE) {
                 $mysqli->close();
                 return true;
@@ -102,7 +102,7 @@ class PetModel
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            $sql = "DELETE FROM pet_species WHERE pet_species_id = $id";
+            $sql = "DELETE FROM pets WHERE pet_id = $id";
             if ($mysqli->query($sql) === TRUE) {
                 $mysqli->close();
                 return true;
