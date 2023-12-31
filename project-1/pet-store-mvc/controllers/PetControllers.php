@@ -26,7 +26,7 @@ class PetController
 
     public function displaySpeciesType()
     {
-        $species = $this->model->getPet();
+        // $species = $this->model->getPet();
         // var_dump($specie);
         include "views/petView.php";
         // return $pets;
@@ -40,6 +40,7 @@ class PetController
     {
         $name = $_POST['name'];
         $age = $_POST['age'];
+        $color = $_POST['color'];
         $breed = $_POST['breed'];
         $toy = $_POST['toy'];
         $species = $_POST['species'];
@@ -66,8 +67,6 @@ class PetController
     {
         return $this->model->deletePet($id);
     }
-
-
 
 
 
