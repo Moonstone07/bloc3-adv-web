@@ -49,15 +49,15 @@ class PetController
         $this->displaySpeciesType();
     }
 
-    // public function updateSpeciesType($id, $new_pet_species_type)
-    // {
-    //     return $this->model->updateSpeciesType($id, $new_pet_species_type);
-    // }
+    public function updateSpeciesType($id, $new_pet_species_type)
+    {
+        return $this->model->updateSpeciesType($id, $new_pet_species_type);
+    }
 
-    // public function deleteSpeciesType($id)
-    // {
-    //     return $this->model->deleteSpeciesType($id);
-    // }
+    public function deleteSpeciesType($id)
+    {
+        return $this->model->deleteSpeciesType($id);
+    }
 
 
 }
