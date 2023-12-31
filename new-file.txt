@@ -1,1 +1,7 @@
-bruh!
+I need to add new forms
+    - one for adding into pets table
+    - one for updating information in the pets table
+    - one for deleting info in the pets table
+
+I need to display the breed and species name not the id number
+
