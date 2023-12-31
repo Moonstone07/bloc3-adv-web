@@ -7,10 +7,13 @@ include_once 'models/model.php';
 class PetController
 {
     private $model;
+    private $speciesModel;
+    // private $breedModel;
+    // private $toyModel;
     public function __construct($conn)
     {
         $this->model = new PetModel($conn);
-        // $this->speciesModel = new SpeciesModel($conn);
+        $this->speciesModel = new SpeciesModel($conn);
         // $this->breedModel = new BreedModel($conn);
         // $this->toyModel = new ToyModel($conn);
     }
@@ -32,7 +35,43 @@ class PetController
     /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
     */
 
+//     pet class model
+    public function addPet()
+    {
+        $name = $_POST['name'];
+        $age = $_POST['age'];
+        $breed = $_POST['breed'];
+        $toy = $_POST['toy'];
+        $species = $_POST['species'];
 
+        if (!$name || !$age || !$breed || !$toy || !$species) {
+            echo "Please fill out all fields";
+            $this->petForm();
+            return;
+        } elseif ($this->model->insertPet($name, $age, $color, $breed, $toy, $species)) {
+            echo "Pet added successfully: $name, $age, $color, $breed, $toy, $species";
+        } else {
+            echo "Error adding pet";
+            $this->petForm();
+        }
+        $this->displaySpeciesType();
+    }
+
+    public function updatePet($id, $new_pet_name, $new_pet_age, $new_pet_breed, $new_pet_toy, $new_pet_species)
+    {
+        return $this->model->updatePet($id, $new_pet_name, $new_pet_age, $new_pet_breed, $new_pet_toy, $new_pet_species);
+    }
+
+    public function deletePet($id)
+    {
+        return $this->model->deletePet($id);
+    }
+
+
+
+
+
+//     species class model
     public function addSpeciesType()
     {
         $type = $_POST['type'];
@@ -41,7 +80,7 @@ class PetController
             echo "Please fill out all fields";
             $this->petForm();
             return;
-        } elseif ($this->model->insertPet($type)) {
+        } elseif ($this->speciesModel->insertSpeciesType($type)) {
             echo "Pet type added successfully: $type";
         } else {
             echo "Error adding pet type";
@@ -52,12 +91,12 @@ class PetController
 
     public function updateSpeciesType($id, $new_pet_species_type)
     {
-        return $this->model->updatePet($id, $new_pet_species_type);
+        return $this->speciesModel->updateSpeciesType($id, $new_pet_species_type);
     }
 
     public function deleteSpeciesType($id)
     {
-        return $this->model->deletePet($id);
+        return $this->speciesModel->deleteSpeciesType($id);
     }
 
 

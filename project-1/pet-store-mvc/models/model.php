@@ -58,13 +58,13 @@ class PetModel
 
 
     // insert a new pet into the database
-    public function insertPet($pets)
+    public function insertPet($name, $gender, $age, $color, $breed, $species)
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            if ($mysqli->query("INSERT INTO pets (pets) 
+            if ($mysqli->query("INSERT INTO pets (pet_name, pet_gender, pet_age, pet_color, breed_id, species_id) 
 
-            VALUES ('$pets')") === TRUE) {
+            VALUES ('$name', '$gender', '$age', '$color', '$breed', '$species')") === TRUE) {
                 $mysqli->close();
                 return true;
             } else {
