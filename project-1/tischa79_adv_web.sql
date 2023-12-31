@@ -6,175 +6,177 @@
 -- Generation Time: Dec 03, 2023 at 10:04 PM
 -- Server version: 10.3.38-MariaDB-0ubuntu0.20.04.1
 -- PHP Version: 8.2.11
+SET
+  SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
 
+SET
+  time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tischa79_adv_web`
+-- Database: `tischa_pet_store`
 --
+-- --------------------------------------------------------
+--
+-- Table structure for table `pets`
+--
+CREATE TABLE `pets` (
+  `pet_id` int(11) NOT NULL,
+  `pet_name` varchar(256) NOT NULL,
+  `pet_gender` varchar(256) NOT NULL,
+  `pet_age` int(11) NOT NULL,
+  `pet_color` varchar(256) NOT NULL,
+  `breed_id` int(11) NOT NULL,
+  `species_id` int(11) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `pet_breed`
+--
+CREATE TABLE `pet_breed` (
+  `pet_breed_id` int(11) NOT NULL,
+  `pet_breed_name` varchar(256) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
 --
--- Table structure for table `pet`
+-- Dumping data for table `pet_breed`
 --
-
-CREATE TABLE `pet` (
-  `PetID` int(11) NOT NULL,
-  `PetName` varchar(256) NOT NULL,
-  `PetAge` int(11) NOT NULL,
-  `PetGender` varchar(256) NOT NULL,
-  `PetColor` varchar(256) NOT NULL,
-  `PetSpeciesID` int(11) NOT NULL,
-  `PetBreedID` int(11) NOT NULL,
-  `PetToyID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `pet`
---
-
-INSERT INTO `pet` (`PetID`, `PetName`, `PetAge`, `PetGender`, `PetColor`, `PetSpeciesID`, `PetBreedID`, `PetToyID`) VALUES
-(1, 'margot', 1, 'female', 'orange and black', 1, 2, 2),
-(2, 'nicholas', 7, 'male', 'black', 1, 1, 1);
+INSERT INTO
+  `pet_breed` (`pet_breed_id`, `pet_breed_name`)
+VALUES
+  (1, 'coclico'),
+  (2, 'spanish cat'),
+  (3, 'pomeranian'),
+  (4, 'chihuahua');
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `pet_species`
+--
+CREATE TABLE `pet_species` (
+  `pet_species_id` int(11) NOT NULL,
+  `pet_species_type` varchar(256) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
 --
--- Table structure for table `PetBreed`
+-- Dumping data for table `pet_species`
 --
-
-CREATE TABLE `PetBreed` (
-  `PetBreedID` int(11) NOT NULL,
-  `PetBreedName` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `PetBreed`
---
-
-INSERT INTO `PetBreed` (`PetBreedID`, `PetBreedName`) VALUES
-(1, 'short hair black '),
-(2, 'coqlicot');
+INSERT INTO
+  `pet_species` (`pet_species_id`, `pet_species_type`)
+VALUES
+  (1, 'cat'),
+  (2, 'dog'),
+  (3, 'bird'),
+  (4, 'monkey'),
+  (5, 'rodent');
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `pet_toy`
+--
+CREATE TABLE `pet_toy` (
+  `pet_toy_id` int(11) NOT NULL,
+  `pet_toy_name` varchar(256) NOT NULL,
+  `pet_toy_price` decimal(10, 0) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
 --
--- Table structure for table `PetSpecies`
+-- Dumping data for table `pet_toy`
 --
-
-CREATE TABLE `PetSpecies` (
-  `PetSpeciesID` int(11) NOT NULL,
-  `SpeciesName` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `PetSpecies`
---
-
-INSERT INTO `PetSpecies` (`PetSpeciesID`, `SpeciesName`) VALUES
-(1, 'cat');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `PetToy`
---
-
-CREATE TABLE `PetToy` (
-  `PetToyID` int(11) NOT NULL,
-  `PetToyName` varchar(256) NOT NULL,
-  `PetToyPrice` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `PetToy`
---
-
-INSERT INTO `PetToy` (`PetToyID`, `PetToyName`, `PetToyPrice`) VALUES
-(1, 'mouse', 3.00),
-(2, 'ball', 5.00);
+INSERT INTO
+  `pet_toy` (`pet_toy_id`, `pet_toy_name`, `pet_toy_price`)
+VALUES
+  (1, 'ball', 1),
+  (2, 'mouse', 2);
 
 --
 -- Indexes for dumped tables
 --
+--
+-- Indexes for table `pets`
+--
+ALTER TABLE
+  `pets`
+ADD
+  PRIMARY KEY (`pet_id`);
 
 --
--- Indexes for table `pet`
+-- Indexes for table `pet_breed`
 --
-ALTER TABLE `pet`
-  ADD PRIMARY KEY (`PetID`),
-  ADD KEY `PetBreedID` (`PetBreedID`),
-  ADD KEY `PetSpeciesID` (`PetSpeciesID`),
-  ADD KEY `PetToyID` (`PetToyID`);
+ALTER TABLE
+  `pet_breed`
+ADD
+  PRIMARY KEY (`pet_breed_id`);
 
 --
--- Indexes for table `PetBreed`
+-- Indexes for table `pet_species`
 --
-ALTER TABLE `PetBreed`
-  ADD PRIMARY KEY (`PetBreedID`);
+ALTER TABLE
+  `pet_species`
+ADD
+  PRIMARY KEY (`pet_species_id`);
 
 --
--- Indexes for table `PetSpecies`
+-- Indexes for table `pet_toy`
 --
-ALTER TABLE `PetSpecies`
-  ADD PRIMARY KEY (`PetSpeciesID`);
-
---
--- Indexes for table `PetToy`
---
-ALTER TABLE `PetToy`
-  ADD PRIMARY KEY (`PetToyID`);
+ALTER TABLE
+  `pet_toy`
+ADD
+  PRIMARY KEY (`pet_toy_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+--
+-- AUTO_INCREMENT for table `pets`
+--
+ALTER TABLE
+  `pets`
+MODIFY
+  `pet_id` int(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 4;
 
 --
--- AUTO_INCREMENT for table `pet`
+-- AUTO_INCREMENT for table `pet_breed`
 --
-ALTER TABLE `pet`
-  MODIFY `PetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE
+  `pet_breed`
+MODIFY
+  `pet_breed_id` int(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 5;
 
 --
--- AUTO_INCREMENT for table `PetBreed`
+-- AUTO_INCREMENT for table `pet_species`
 --
-ALTER TABLE `PetBreed`
-  MODIFY `PetBreedID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE
+  `pet_species`
+MODIFY
+  `pet_species_id` int(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 6;
 
 --
--- AUTO_INCREMENT for table `PetSpecies`
+-- AUTO_INCREMENT for table `pet_toy`
 --
-ALTER TABLE `PetSpecies`
-  MODIFY `PetSpeciesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE
+  `pet_toy`
+MODIFY
+  `pet_toy_id` int(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 3;
 
---
--- AUTO_INCREMENT for table `PetToy`
---
-ALTER TABLE `PetToy`
-  MODIFY `PetToyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `pet`
---
-ALTER TABLE `pet`
-  ADD CONSTRAINT `PetBreedID` FOREIGN KEY (`PetBreedID`) REFERENCES `PetBreed` (`PetBreedID`),
-  ADD CONSTRAINT `PetSpeciesID` FOREIGN KEY (`PetSpeciesID`) REFERENCES `PetSpecies` (`PetSpeciesID`),
-  ADD CONSTRAINT `PetToyID` FOREIGN KEY (`PetToyID`) REFERENCES `PetToy` (`PetToyID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
