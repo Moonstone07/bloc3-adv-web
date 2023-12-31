@@ -10,6 +10,9 @@ class PetController
     public function __construct($conn)
     {
         $this->model = new PetModel($conn);
+        // $this->speciesModel = new SpeciesModel($conn);
+        // $this->breedModel = new BreedModel($conn);
+        // $this->toyModel = new ToyModel($conn);
     }
 
     public function petForm()
@@ -20,13 +23,13 @@ class PetController
 
     public function displaySpeciesType()
     {
-        $species = $this->model->getSpeciesType();
+        $species = $this->model->getPet();
         // var_dump($specie);
         include "views/petView.php";
         // return $pets;
     }
 
-    /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also displayed.
+    /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
     */
 
 
@@ -38,7 +41,7 @@ class PetController
             echo "Please fill out all fields";
             $this->petForm();
             return;
-        } elseif ($this->model->insertSpeciesType($type)) {
+        } elseif ($this->model->insertPet($type)) {
             echo "Pet type added successfully: $type";
         } else {
             echo "Error adding pet type";
@@ -49,12 +52,12 @@ class PetController
 
     public function updateSpeciesType($id, $new_pet_species_type)
     {
-        return $this->model->updateSpeciesType($id, $new_pet_species_type);
+        return $this->model->updatePet($id, $new_pet_species_type);
     }
 
     public function deleteSpeciesType($id)
     {
-        return $this->model->deleteSpeciesType($id);
+        return $this->model->deletePet($id);
     }
 
 

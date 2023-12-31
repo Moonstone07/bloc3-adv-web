@@ -40,7 +40,141 @@ class PetModel
     }
 
 
-    // select all pets from the database to display
+    // select all species type from the database to display
+    public function getPet()
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $result = $mysqli->query("SELECT * FROM pet_species");
+            while ($row = $result->fetch_assoc()) {
+                $results[] = $row;
+            }
+            $mysqli->close();
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+
+    // insert a new species type into the database
+    public function insertPet($pet_species_type)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            if ($mysqli->query("INSERT INTO pet_species (pet_species_type) 
+
+            VALUES ('$pet_species_type')") === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    //update a species type
+    public function updatePet($id, $new_pet_species_type)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "UPDATE pet_species SET pet_species_type = '$new_pet_species_type' WHERE pet_species_id = $id";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    //delete a species type
+
+    public function deletePet($id)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "DELETE FROM pet_species WHERE pet_species_id = $id";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+}
+
+class BreedModel
+{
+    private $mysqli;
+    private $ConnectionDA;
+    public function __construct($ConnectionDA)
+    {
+        $this->ConnectionDA = $ConnectionDA;
+    }
+
+    public function connect()
+    {
+        try {
+            $mysqli = new mysqli(
+                $this->ConnectionDA->host,
+                $this->ConnectionDA->username,
+                $this->ConnectionDA->password,
+                $this->ConnectionDA->dbname
+            );
+
+            if ($mysqli->connect_error) {
+                throw new Exception("could not connect");
+            }
+            return $mysqli;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+}
+
+class SpeciesModel
+{
+    private $mysqli;
+    private $ConnectionDA;
+    public function __construct($ConnectionDA)
+    {
+        $this->ConnectionDA = $ConnectionDA;
+    }
+
+    public function connect()
+    {
+        try {
+            $mysqli = new mysqli(
+                $this->ConnectionDA->host,
+                $this->ConnectionDA->username,
+                $this->ConnectionDA->password,
+                $this->ConnectionDA->dbname
+            );
+
+            if ($mysqli->connect_error) {
+                throw new Exception("could not connect");
+            }
+            return $mysqli;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    // select all species type from the database to display
     public function getSpeciesType()
     {
         $mysqli = $this->connect();
@@ -57,7 +191,7 @@ class PetModel
     }
 
 
-    // insert a new pet into the database
+    // insert a new species type into the database
     public function insertSpeciesType($pet_species_type)
     {
         $mysqli = $this->connect();
@@ -112,6 +246,35 @@ class PetModel
                 return false;
             }
         } else {
+            return false;
+        }
+    }
+}
+
+class ToyModel
+{
+    private $mysqli;
+    private $ConnectionDA;
+    public function __construct($ConnectionDA)
+    {
+        $this->ConnectionDA = $ConnectionDA;
+    }
+
+    public function connect()
+    {
+        try {
+            $mysqli = new mysqli(
+                $this->ConnectionDA->host,
+                $this->ConnectionDA->username,
+                $this->ConnectionDA->password,
+                $this->ConnectionDA->dbname
+            );
+
+            if ($mysqli->connect_error) {
+                throw new Exception("could not connect");
+            }
+            return $mysqli;
+        } catch (Exception $e) {
             return false;
         }
     }
