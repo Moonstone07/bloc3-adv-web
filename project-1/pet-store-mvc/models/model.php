@@ -40,7 +40,7 @@ class PetModel
     }
 
 
-    // select all pets from the database
+    // select all pets from the database to display
     public function getSpeciesType()
     {
         $mysqli = $this->connect();
@@ -50,7 +50,7 @@ class PetModel
                 $results[] = $row;
             }
             $mysqli->close();
-            // return $results;
+            return $results;
         } else {
             return false;
         }
@@ -63,7 +63,7 @@ class PetModel
         $mysqli = $this->connect();
         if ($mysqli) {
             if ($mysqli->query("INSERT INTO pet_species (pet_species_type) 
-            
+
             VALUES ('$pet_species_type')") === TRUE) {
                 $mysqli->close();
                 return true;
@@ -77,44 +77,44 @@ class PetModel
         }
     }
 
-    //update a species type
-    public function updateSpeciesType($id, $new_pet_species_type)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $sql = "UPDATE pet_species SET pet_species_type = '$new_pet_species_type' WHERE pet_species_id = $id";
-            if ($mysqli->query($sql) === TRUE) {
-                $mysqli->close();
-                return true;
-            } else {
-                echo "Error: " . $mysqli->error;
-                $mysqli->close();
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+    // //update a species type
+    // public function updateSpeciesType($id, $new_pet_species_type)
+    // {
+    //     $mysqli = $this->connect();
+    //     if ($mysqli) {
+    //         $sql = "UPDATE pet_species SET pet_species_type = '$new_pet_species_type' WHERE pet_species_id = $id";
+    //         if ($mysqli->query($sql) === TRUE) {
+    //             $mysqli->close();
+    //             return true;
+    //         } else {
+    //             echo "Error: " . $mysqli->error;
+    //             $mysqli->close();
+    //             return false;
+    //         }
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
-    //delete a species type
+    // //delete a species type
 
-    public function deleteSpeciesType($id)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $sql = "DELETE FROM pet_species WHERE pet_species_id = $id";
-            if ($mysqli->query($sql) === TRUE) {
-                $mysqli->close();
-                return true;
-            } else {
-                echo "Error: " . $mysqli->error;
-                $mysqli->close();
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+    // public function deleteSpeciesType($id)
+    // {
+    //     $mysqli = $this->connect();
+    //     if ($mysqli) {
+    //         $sql = "DELETE FROM pet_species WHERE pet_species_id = $id";
+    //         if ($mysqli->query($sql) === TRUE) {
+    //             $mysqli->close();
+    //             return true;
+    //         } else {
+    //             echo "Error: " . $mysqli->error;
+    //             $mysqli->close();
+    //             return false;
+    //         }
+    //     } else {
+    //         return false;
+    //     }
+    // }
 }
 ?>
 

@@ -17,6 +17,21 @@ class PetController
         include "views/petForm.php";
     }
 
+
+    public function displaySpeciesType()
+    {
+        $species = $this->model->getSpeciesType();
+        // var_dump($specie);
+        include "views/petView.php";
+        // return $pets;
+    }
+
+    /* the display function is not working, it is not displaying the pet species type only NULL. It was displaying the table before, but i tried deleting in phpmyadmin. I am not sure if that is the reason why it is not displaying the table.
+    */
+
+
+
+
     public function addSpeciesType()
     {
         $type = $_POST['type'];
@@ -34,27 +49,17 @@ class PetController
         $this->displaySpeciesType();
     }
 
-    public function updateSpeciesType($id, $new_pet_species_type)
-    {
-        return $this->model->updateSpeciesType($id, $new_pet_species_type);
-    }
+    // public function updateSpeciesType($id, $new_pet_species_type)
+    // {
+    //     return $this->model->updateSpeciesType($id, $new_pet_species_type);
+    // }
 
-    public function deleteSpeciesType($id)
-    {
-        return $this->model->deleteSpeciesType($id);
-    }
+    // public function deleteSpeciesType($id)
+    // {
+    //     return $this->model->deleteSpeciesType($id);
+    // }
 
 
-    public function displaySpeciesType()
-    {
-        $species = $this->model->getSpeciesType();
-         // var_dump($species);
-        include "views/petView.php";
-        // return $pets;
-    }
-
-    /* the display function is not working, it is not displaying the pet species type only NULL. It was displaying the table before, but i tried deleting in phpmyadmin. I am not sure if that is the reason why it is not displaying the table.
-    */
 }
 
 
@@ -78,12 +83,12 @@ if (isset($_POST['submit'])) {
     $controller->petForm();
 }
 
-// if (isset($_POST['update_id'])) {
-//     $controller->updateSpeciesType($_POST['update_id'], $_POST['new_species_type']);
-// }
+if (isset($_POST['update_id'])) {
+    $controller->updateSpeciesType($_POST['update_id'], $_POST['new_species_type']);
+}
 
-// if (isset($_POST['delete_id'])) {
-//     $controller->deleteSpeciesType($_POST['delete_id']);
-// }
+if (isset($_POST['delete_id'])) {
+    $controller->deleteSpeciesType($_POST['delete_id']);
+}
 
 ?>
