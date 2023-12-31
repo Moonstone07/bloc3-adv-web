@@ -105,10 +105,10 @@ VALUES
 --
 -- Indexes for table `pets`
 --
-ALTER TABLE
-  `pets`
-ADD
-  PRIMARY KEY (`pet_id`);
+ALTER TABLE `pets`
+  ADD PRIMARY KEY (`pet_id`),
+  ADD KEY `pet_breed` (`breed_id`),
+  ADD KEY `pet_species` (`species_id`);
 
 --
 -- Indexes for table `pet_breed`
@@ -144,7 +144,7 @@ ALTER TABLE
   `pets`
 MODIFY
   `pet_id` int(11) NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 4;
+  AUTO_INCREMENT = 1;
 
 --
 -- AUTO_INCREMENT for table `pet_breed`
@@ -173,6 +173,19 @@ MODIFY
   `pet_toy_id` int(11) NOT NULL AUTO_INCREMENT,
   AUTO_INCREMENT = 3;
 
+COMMIT;
+
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `pets`
+--
+ALTER TABLE `pets`
+  ADD CONSTRAINT `pet_breed` FOREIGN KEY (`breed_id`) REFERENCES `pet_breed` (`pet_breed_id`),
+  ADD CONSTRAINT `pet_species` FOREIGN KEY (`species_id`) REFERENCES `pet_species` (`pet_species_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
