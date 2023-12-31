@@ -26,10 +26,8 @@ class PetController
         // return $pets;
     }
 
-    /* the display function is not working, it is not displaying the pet species type only NULL. It was displaying the table before, but i tried deleting in phpmyadmin. I am not sure if that is the reason why it is not displaying the table.
+    /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data will be displayed.
     */
-
-
 
 
     public function addSpeciesType()
