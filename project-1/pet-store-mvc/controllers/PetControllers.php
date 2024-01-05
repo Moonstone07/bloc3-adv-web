@@ -9,14 +9,11 @@ class PetController
 {
     // private $model;
     private $speciesModel;
-    // private $breedModel;
-    // private $toyModel;
+
     public function __construct($conn)
     {
-        // $this->model = new PetModel($conn);
         $this->speciesModel = new SpeciesModel($conn);
-        // $this->breedModel = new BreedModel($conn);
-        // $this->toyModel = new ToyModel($conn);
+
     }
 
     public function petForm()
@@ -56,7 +53,7 @@ class PetController
     public function displaySpeciesType()
     {
         $species = $this->speciesModel->getSpeciesType();
-        var_dump($species);
+        // var_dump($species);
         include "views/petView.php";
     }
 

@@ -14,7 +14,7 @@ if ($species) {
         echo "<td>" . $specie['pet_species_id'] . "</td>";
         echo "<td>" . $specie['pet_species_type'] . "</td>";
         echo "<td>";
-        // include 'updateSpeciesTypeForm.php';
+        include 'updateSpeciesTypeForm.php';
         // include 'deleteSpeciesTypeForm.php';
         echo "</td>";
         echo "</tr>";
