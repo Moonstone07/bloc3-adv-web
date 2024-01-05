@@ -50,22 +50,45 @@ class PetController
         return $this->speciesModel->deleteSpeciesType($id);
     }
 
-    public function displaySpeciesType()
-    {
-        $species = $this->speciesModel->getSpeciesType();
-        // var_dump($species);
-        include "views/petView.php";
-    }
-
-
 
 //  PET TABLE MODEL
 
-public function displayPet()
+
+public function addPet()
 {
+    $name = $_POST['name'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $color = $_POST['color'];
+    $breed_id = $_POST['breed_id'];
+    $species_id = $_POST['species_id'];
+
+    if (!$name || !$age || !$gender || !$color || !$breed_id || !$species_id) {
+        echo "Please fill out all fields";
+        $this->petForm();
+        return;
+    } elseif ($this->petModel->insertPet($name, $age, $gender, $color, $breed_id, $species_id)) {
+        echo "Pet added successfully: $name";
+    } else {
+        echo "Error adding pet";
+        $this->petForm();
+    }
+    $this->display();
+
+
+}
+
+
+
+
+// make only one display function then add as you go and call it in the controller
+public function display()
+{
+    $species = $this->speciesModel->getSpeciesType();
     $pets = $this->petModel->getAllPets();
     include "views/petView.php";
 }
+
 }
 
 
@@ -79,8 +102,8 @@ $connect2DA = new ConnectionDA(
 
 $controller = new PetController($connect2DA);
 
-$controller->displaySpeciesType();
-$controller->displayPet();
+$controller->display();
+
 
 if (isset($_POST['submit'])) {
     $controller->addSpeciesType();
