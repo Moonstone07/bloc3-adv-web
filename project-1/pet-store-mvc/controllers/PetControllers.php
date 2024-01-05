@@ -9,6 +9,7 @@ class PetController
 {
     private $speciesModel;
     private $petModel;
+    private $BreedModel;
 
     public function __construct($conn)
     {
@@ -18,6 +19,8 @@ class PetController
 
     public function petForm()
     {
+        $species = $this->speciesModel->getSpeciesType();
+        $breeds = $this->BreedModel->getAllBreeds();
         include "views/petForm.php";
     }
 
@@ -74,11 +77,7 @@ public function addPet()
         $this->petForm();
     }
     $this->display();
-
-
 }
-
-
 
 
 // make only one display function then add as you go and call it in the controller
