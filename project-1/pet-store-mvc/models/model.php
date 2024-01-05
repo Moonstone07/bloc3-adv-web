@@ -96,7 +96,7 @@ class PetModel
         }
     }
 
-    //delete a species type
+    //delete a pet from the database
 
     public function deletePet($id)
     {
