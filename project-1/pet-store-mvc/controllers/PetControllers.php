@@ -7,13 +7,13 @@ include_once 'models/model.php';
 
 class PetController
 {
-    // private $model;
     private $speciesModel;
+    private $petModel;
 
     public function __construct($conn)
     {
         $this->speciesModel = new SpeciesModel($conn);
-
+        $this->petModel = new PetModel($conn);
     }
 
     public function petForm()
@@ -58,6 +58,14 @@ class PetController
     }
 
 
+
+//  PET TABLE MODEL
+
+public function displayPet()
+{
+    $pets = $this->petModel->getAllPets();
+    include "views/petView.php";
+}
 }
 
 
@@ -72,6 +80,7 @@ $connect2DA = new ConnectionDA(
 $controller = new PetController($connect2DA);
 
 $controller->displaySpeciesType();
+$controller->displayPet();
 
 if (isset($_POST['submit'])) {
     $controller->addSpeciesType();
