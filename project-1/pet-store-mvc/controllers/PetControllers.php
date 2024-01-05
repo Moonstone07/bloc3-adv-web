@@ -15,6 +15,7 @@ class PetController
     {
         $this->speciesModel = new SpeciesModel($conn);
         $this->petModel = new PetModel($conn);
+        $this->BreedModel = new BreedModel($conn);
     }
 
     public function petForm()

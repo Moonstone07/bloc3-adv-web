@@ -18,7 +18,7 @@
 
     <label for="age">age:</label>
     <input type="text" id="age" name="age" required">
-    
+
     <label for="gender">gender:</label>
     <input type="text" id="gender" name="gender" required">
 
@@ -30,7 +30,7 @@
 
     <select name="breed_id" id="breed_id">
         <?php foreach ($breeds as $breed) : ?>
-            <option value="<?php echo $breed['breed_id']; ?>"><?php echo $breed['breed_name']; ?></option>
+            <option value="<?php echo $breed['pet_breed_id']; ?>"><?php echo $breed['pet_breed_name']; ?></option>
         <?php endforeach; ?>
     </select>
 
