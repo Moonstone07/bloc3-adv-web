@@ -37,7 +37,7 @@ class PetController
             echo "Error adding pet type";
             $this->petForm();
         }
-        $this->displaySpeciesType();
+        $this->display();
     }
 
     public function updateSpeciesType($id, $new_pet_species_type)
