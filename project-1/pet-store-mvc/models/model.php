@@ -318,8 +318,6 @@ class BreedModel
             return false;
         }
     }
-
-
 }
 
 ?>

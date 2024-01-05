@@ -26,12 +26,12 @@ class PetController
     }
 
 
-//  SPECIES TABLE MODEL
+    //  SPECIES TABLE MODEL
     public function addSpeciesType()
     {
         $type = $_POST['pet_species_type'];
         // Warning: Undefined array key "pet_species_type" in /var/www/vhosts/tischa79.web582.com/httpdocs/block3-adv-web/project-1/pet-store-mvc/controllers/PetControllers.php on line 32
-     // Please fill out all fields
+        // Please fill out all fields
 
         if (!$type) {
             echo "Please fill out all fields";
@@ -57,48 +57,47 @@ class PetController
     }
 
 
-//  PET TABLE MODEL
-public function addPet()
-{
-    $name = $_POST['name'];
-    $age = $_POST['age'];
-    $gender = $_POST['gender'];
-    $color = $_POST['color'];
-    $breed_id = $_POST['breed_id'];
-    $species_id = $_POST['species_id'];
+    //  PET TABLE MODEL
+    public function addPet()
+    {
+        $name = $_POST['name'];
+        $age = $_POST['age'];
+        $gender = $_POST['gender'];
+        $color = $_POST['color'];
+        $breed_id = $_POST['breed_id'];
+        $species_id = $_POST['species_id'];
 
-    if (!$name || !$age || !$gender || !$color || !$breed_id || !$species_id) {
-        echo "Please fill out all fields";
-        $this->petForm();
-        return;
-    } elseif ($this->petModel->insertPet($name, $age, $gender, $color, $breed_id, $species_id)) {
-        echo "Pet added successfully: $name";
-    } else {
-        echo "Error adding pet";
-        $this->petForm();
+        if (!$name || !$age || !$gender || !$color || !$breed_id || !$species_id) {
+            echo "Please fill out all fields";
+            $this->petForm();
+            return;
+        } elseif ($this->petModel->insertPet($name, $age, $gender, $color, $breed_id, $species_id)) {
+            echo "Pet added successfully: $name";
+        } else {
+            echo "Error adding pet";
+            $this->petForm();
+        }
+        $this->display();
     }
-    $this->display();
-}
 
 
-// make only one display function then add as you go and call it in the controller
-public function display()
-{
-    $species = $this->speciesModel->getSpeciesType();
-    $pets = $this->petModel->getAllPets();
-    include "views/petView.php";
-}
-
+    // make only one display function then add as you go and call it in the controller
+    public function display()
+    {
+        $species = $this->speciesModel->getSpeciesType();
+        $pets = $this->petModel->getAllPets();
+        include "views/petView.php";
+    }
 }
 
 
 include_once 'controllers/config.php';
 $connect2DA = new ConnectionDA(
-        $host,
-        $username,
-        $password,
-        $dbname
-    );
+    $host,
+    $username,
+    $password,
+    $dbname
+);
 
 $controller = new PetController($connect2DA);
 
@@ -132,6 +131,5 @@ $controller->petForm();
 
 
 
-    /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
+/* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
     */
-?>
