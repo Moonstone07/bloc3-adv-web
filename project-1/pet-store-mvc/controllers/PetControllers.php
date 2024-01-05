@@ -30,6 +30,8 @@ class PetController
     public function addSpeciesType()
     {
         $type = $_POST['pet_species_type'];
+        // Warning: Undefined array key "pet_species_type" in /var/www/vhosts/tischa79.web582.com/httpdocs/block3-adv-web/project-1/pet-store-mvc/controllers/PetControllers.php on line 32
+     // Please fill out all fields
 
         if (!$type) {
             echo "Please fill out all fields";
