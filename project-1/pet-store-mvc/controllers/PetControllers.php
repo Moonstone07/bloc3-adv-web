@@ -29,7 +29,7 @@ class PetController
 //  SPECIES TABLE MODEL
     public function addSpeciesType()
     {
-        $type = $_POST['type'];
+        $type = $_POST['pet_species_type'];
 
         if (!$type) {
             echo "Please fill out all fields";
@@ -56,8 +56,6 @@ class PetController
 
 
 //  PET TABLE MODEL
-
-
 public function addPet()
 {
     $name = $_POST['name'];
@@ -112,13 +110,8 @@ if (isset($_POST['submit'])) {
 // Calling petForm() only once regardless of whether 'submit' is set
 $controller->petForm();
 
-if (isset($update_id) && isset($new_species_type)) {
-    $controller->updateSpeciesType($update_id, $new_species_type);
-}
 
-if (isset($delete_id)) {
-    $controller->deleteSpeciesType($delete_id);
-}
+
 
 
 
