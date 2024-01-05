@@ -4,15 +4,16 @@ ini_set('display_errors', 1);
 
 include_once 'models/model.php';
 
+
 class PetController
 {
-    private $model;
+    // private $model;
     private $speciesModel;
     // private $breedModel;
     // private $toyModel;
     public function __construct($conn)
     {
-        $this->model = new PetModel($conn);
+        // $this->model = new PetModel($conn);
         $this->speciesModel = new SpeciesModel($conn);
         // $this->breedModel = new BreedModel($conn);
         // $this->toyModel = new ToyModel($conn);
@@ -24,52 +25,7 @@ class PetController
     }
 
 
-    public function displaySpeciesType()
-    {
-        // $species = $this->speciesModel->getSpeciesType();
-        $pets = $this->model->getPet();
-        include "views/petView.php";
-    }
-
-    /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
-    */
-
-//     pet class model
-    public function addPet()
-    {
-        $name = $_POST['name'];
-        $age = $_POST['age'];
-        $color = $_POST['color'];
-        $breed = $_POST['breed'];
-        $toy = $_POST['toy'];
-        $species = $_POST['species'];
-
-        if (!$name || !$age || !$breed || !$toy || !$species) {
-            echo "Please fill out all fields";
-            $this->petForm();
-            return;
-        } elseif ($this->model->insertPet($name, $age, $color, $breed, $toy, $species)) {
-            echo "Pet added successfully: $name, $age, $color, $breed, $toy, $species";
-        } else {
-            echo "Error adding pet";
-            $this->petForm();
-        }
-        $this->displaySpeciesType();
-    }
-
-    public function updatePet($id, $new_pet_name, $new_pet_age, $new_pet_breed, $new_pet_toy, $new_pet_species)
-    {
-        return $this->model->updatePet($id, $new_pet_name, $new_pet_age, $new_pet_breed, $new_pet_toy, $new_pet_species);
-    }
-
-    public function deletePet($id)
-    {
-        return $this->model->deletePet($id);
-    }
-
-
-
-//     species class model
+//  SPECIES TABLE MODEL
     public function addSpeciesType()
     {
         $type = $_POST['type'];
@@ -97,9 +53,15 @@ class PetController
         return $this->speciesModel->deleteSpeciesType($id);
     }
 
+    public function displaySpeciesType()
+    {
+        $species = $this->speciesModel->getSpeciesType();
+        var_dump($species);
+        include "views/petView.php";
+    }
+
 
 }
-
 
 
 include_once 'controllers/config.php';
@@ -129,4 +91,23 @@ if (isset($delete_id)) {
     $controller->deleteSpeciesType($delete_id);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
+    */
 ?>

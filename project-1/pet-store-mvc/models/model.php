@@ -11,140 +11,6 @@ class ConnectionDA
     }
 }
 
-class PetModel
-{
-    private $mysqli;
-    private $ConnectionDA;
-    public function __construct($ConnectionDA)
-    {
-        $this->ConnectionDA = $ConnectionDA;
-    }
-
-    public function connect()
-    {
-        try {
-            $mysqli = new mysqli(
-                $this->ConnectionDA->host,
-                $this->ConnectionDA->username,
-                $this->ConnectionDA->password,
-                $this->ConnectionDA->dbname
-            );
-
-            if ($mysqli->connect_error) {
-                throw new Exception("could not connect");
-            }
-            return $mysqli;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-
-
-    // select all pets from the database to display
-    public function getPet()
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $result = $mysqli->query("SELECT * FROM pets");
-            while ($row = $result->fetch_assoc()) {
-                $results[] = $row;
-            }
-            $mysqli->close();
-            return $results;
-        } else {
-            return false;
-        }
-    }
-
-
-    // insert a new pet into the database
-    public function insertPet($name, $gender, $age, $color, $breed, $species)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            if ($mysqli->query("INSERT INTO pets (pet_name, pet_gender, pet_age, pet_color, breed_id, species_id) 
-
-            VALUES ('$name', '$gender', '$age', '$color', '$breed', '$species')") === TRUE) {
-                $mysqli->close();
-                return true;
-            } else {
-                echo "Error: " . $mysqli->error;
-                $mysqli->close();
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    //update a pet name
-    public function updatePet($name, $new_pet_name)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $sql = "UPDATE pets SET pet_name = '$new_pet_name' WHERE pet_name = $name";
-            if ($mysqli->query($sql) === TRUE) {
-                $mysqli->close();
-                return true;
-            } else {
-                echo "Error: " . $mysqli->error;
-                $mysqli->close();
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    //delete a pet from the database
-
-    public function deletePet($id)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $sql = "DELETE FROM pets WHERE pet_id = $id";
-            if ($mysqli->query($sql) === TRUE) {
-                $mysqli->close();
-                return true;
-            } else {
-                echo "Error: " . $mysqli->error;
-                $mysqli->close();
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-}
-
-class BreedModel
-{
-    private $mysqli;
-    private $ConnectionDA;
-    public function __construct($ConnectionDA)
-    {
-        $this->ConnectionDA = $ConnectionDA;
-    }
-
-    public function connect()
-    {
-        try {
-            $mysqli = new mysqli(
-                $this->ConnectionDA->host,
-                $this->ConnectionDA->username,
-                $this->ConnectionDA->password,
-                $this->ConnectionDA->dbname
-            );
-
-            if ($mysqli->connect_error) {
-                throw new Exception("could not connect");
-            }
-            return $mysqli;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-}
 
 class SpeciesModel
 {
@@ -189,7 +55,6 @@ class SpeciesModel
             return false;
         }
     }
-
 
     // insert a new species type into the database
     public function insertSpeciesType($pet_species_type)
@@ -251,34 +116,7 @@ class SpeciesModel
     }
 }
 
-class ToyModel
-{
-    private $mysqli;
-    private $ConnectionDA;
-    public function __construct($ConnectionDA)
-    {
-        $this->ConnectionDA = $ConnectionDA;
-    }
 
-    public function connect()
-    {
-        try {
-            $mysqli = new mysqli(
-                $this->ConnectionDA->host,
-                $this->ConnectionDA->username,
-                $this->ConnectionDA->password,
-                $this->ConnectionDA->dbname
-            );
-
-            if ($mysqli->connect_error) {
-                throw new Exception("could not connect");
-            }
-            return $mysqli;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-}
 ?>
 
 
