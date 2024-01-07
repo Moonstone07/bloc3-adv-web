@@ -7,85 +7,46 @@ include_once 'models/model.php';
 
 class PetController
 {
-    private $speciesModel;
-    private $petModel;
     private $BreedModel;
 
     public function __construct($conn)
     {
-        $this->speciesModel = new SpeciesModel($conn);
-        $this->petModel = new PetModel($conn);
         $this->BreedModel = new BreedModel($conn);
     }
 
     public function petForm()
     {
-        $species = $this->speciesModel->getSpeciesType();
         $breeds = $this->BreedModel->getAllBreeds();
+        // var_dump($breeds);
         include "views/petForm.php";
     }
 
 
-    //  SPECIES TABLE MODEL
-    public function addSpeciesType()
-    {
-        $type = $_POST['pet_species_type'];
-        // Warning: Undefined array key "pet_species_type" in /var/www/vhosts/tischa79.web582.com/httpdocs/block3-adv-web/project-1/pet-store-mvc/controllers/PetControllers.php on line 32
-        // Please fill out all fields
+    //  BREED TABLE MODEL
 
-        if (!$type) {
-            echo "Please fill out all fields";
-            $this->petForm();
-            return;
-        } elseif ($this->speciesModel->insertSpeciesType($type)) {
-            echo "Pet type added successfully: $type";
+    public function addBreedType()
+    {
+        if (!isset($_POST['name']) || empty($_POST['name'])) {
+            echo "Please enter a breed name.";
         } else {
-            echo "Error adding pet type";
-            $this->petForm();
+            $breed_name = $_POST['name'];
+            $this->BreedModel->insertBreed($breed_name);
+            echo "Breed added successfully: $breed_name";
         }
-        $this->display();
     }
 
-    public function updateSpeciesType($id, $new_pet_species_type)
+
+    public function updateBreedName($id, $new_breed_name)
     {
-        return $this->speciesModel->updateSpeciesType($id, $new_pet_species_type);
-    }
-
-    public function deleteSpeciesType($id)
-    {
-        return $this->speciesModel->deleteSpeciesType($id);
+        return $this->BreedModel->updateBreed($id, $new_breed_name);
     }
 
 
-    //  PET TABLE MODEL
-    public function addPet()
-    {
-        $name = $_POST['name'];
-        $age = $_POST['age'];
-        $gender = $_POST['gender'];
-        $color = $_POST['color'];
-        $breed_id = $_POST['breed_id'];
-        $species_id = $_POST['species_id'];
-
-        if (!$name || !$age || !$gender || !$color || !$breed_id || !$species_id) {
-            echo "Please fill out all fields";
-            $this->petForm();
-            return;
-        } elseif ($this->petModel->insertPet($name, $age, $gender, $color, $breed_id, $species_id)) {
-            echo "Pet added successfully: $name";
-        } else {
-            echo "Error adding pet";
-            $this->petForm();
-        }
-        $this->display();
-    }
-
-
+    //  DISPLAY FUNCTION
     // make only one display function then add as you go and call it in the controller
     public function display()
     {
-        $species = $this->speciesModel->getSpeciesType();
-        $pets = $this->petModel->getAllPets();
+        $breeds = $this->BreedModel->getAllBreeds();
         include "views/petView.php";
     }
 }
@@ -105,31 +66,19 @@ $controller->display();
 
 
 if (isset($_POST['submit'])) {
-    $controller->addSpeciesType();
+    $controller->addBreedType();
 }
+
+if (isset($_POST['pet_breed_id'], $_POST['new_breed_name'])) {
+    $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
+}
+
+
 
 // Calling petForm() only once regardless of whether 'submit' is set
 $controller->petForm();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
-    */
+*/
