@@ -1,0 +1,181 @@
+    private $BreedModel;
+
+
+        $this->BreedModel = new BreedModel($conn);
+
+        $breeds = $this->BreedModel->getAllBreeds();
+
+
+
+    //  BREED TABLE MODEL
+
+    public function addBreedType()
+    {
+        if (!isset($_POST['name']) || empty($_POST['name'])) {
+            echo "Please enter a breed name.";
+        } else {
+            $breed_name = $_POST['name'];
+            $this->BreedModel->insertBreed($breed_name);
+            echo "Breed added successfully: $breed_name";
+        }
+    }
+
+
+    public function updateBreedName($id, $new_breed_name)
+    {
+        return $this->BreedModel->updateBreed($id, $new_breed_name);
+    }
+
+    public function deleteBreedType()
+    {
+        if (isset($_POST['pet_breed_id'])) {
+            $breed_id = $_POST['pet_breed_id'];
+            $result = $this->BreedModel->deleteBreed($breed_id);
+            if ($result) {
+                echo "Breed deleted successfully: $breed_id";
+            } else {
+                echo "Error deleting breed: $breed_id";
+            }
+        } else {
+            echo "No breed ID provided.";
+        }
+    }
+
+
+            $breeds = $this->BreedModel->getAllBreeds();
+
+
+// BREEDS
+
+if (isset($_POST['pet_breed_id'], $_POST['new_breed_name'])) {
+    $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
+}
+
+if (isset($_POST['delete'])) {
+    $controller->deleteBreedType();
+}
+
+
+MODEL PAGE
+
+
+class BreedModel
+{
+    private $mysqli;
+    private $ConnectionDA;
+    public function __construct($ConnectionDA)
+    {
+        $this->ConnectionDA = $ConnectionDA;
+    }
+
+    public function connect()
+    {
+        try {
+            $mysqli = new mysqli(
+                $this->ConnectionDA->host,
+                $this->ConnectionDA->username,
+                $this->ConnectionDA->password,
+                $this->ConnectionDA->dbname
+            );
+
+            if ($mysqli->connect_error) {
+                throw new Exception("could not connect");
+            }
+            return $mysqli;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function getAllBreeds()
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $result = $mysqli->query("SELECT * FROM pet_breed");
+            $results = array();
+            while ($row = $result->fetch_assoc()) {
+                $results[] = $row;
+            }
+            $mysqli->close();
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertBreed($breed_name)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            if ($mysqli->query("INSERT INTO pet_breed (pet_breed_name) VALUES ('$breed_name')") === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function updateBreed($id, $new_breed_name)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "UPDATE pet_breed SET pet_breed_name = '$new_breed_name' WHERE pet_breed_id = '$id' ";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteBreed($id)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "DELETE FROM pet_breed WHERE pet_breed_id = $id";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+}
+
+
+
+    if ($breeds) {
+
+        echo "<table border='1'>";
+        echo "<tr>
+        <th>ID</th>
+        <th>Breed Type</th>
+        <th>Update</th>
+    </tr>";
+        foreach ($breeds as $breed) {
+            echo "<td>" . $breed['pet_breed_id'] . "</td>";
+            echo "<td>" . $breed['pet_breed_name'] . "</td>";
+            echo "<td>";
+            include 'views/updateBreedForm.php';
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "No breed data found.";
+    }

@@ -7,61 +7,52 @@ include_once 'models/model.php';
 
 class PetController
 {
-    private $BreedModel;
+    private $ToyModel;
 
     public function __construct($conn)
     {
-        $this->BreedModel = new BreedModel($conn);
+        $this->ToyModel = new ToyModel($conn);
     }
 
     public function petForm()
     {
-        $breeds = $this->BreedModel->getAllBreeds();
-        // var_dump($breeds);
         include "views/petForm.php";
     }
 
+    // TOYS
 
-    //  BREED TABLE MODEL
-
-    public function addBreedType()
+    public function addToyType()
     {
-        if (!isset($_POST['name']) || empty($_POST['name'])) {
-            echo "Please enter a breed name.";
+        if (isset($_POST['name']) && isset($_POST['price'])) {
+            $toy_name = $_POST['name'];
+            $toy_price = $_POST['price'];
+            $this->ToyModel->insertToy($toy_name, $toy_price);
         } else {
-            $breed_name = $_POST['name'];
-            $this->BreedModel->insertBreed($breed_name);
-            echo "Breed added successfully: $breed_name";
+            echo "Toy name or price not provided.";
         }
     }
-
-
-    public function updateBreedName($id, $new_breed_name)
+    public function getToys()
     {
-        return $this->BreedModel->updateBreed($id, $new_breed_name);
+        return $this->ToyModel->getToys();
     }
 
-    public function deleteBreedType()
+    public function updateToy($id, $new_toy_name, $new_toy_price)
     {
-        if (isset($_POST['pet_breed_id'])) {
-            $breed_id = $_POST['pet_breed_id'];
-            $result = $this->BreedModel->deleteBreed($breed_id);
-            if ($result) {
-                echo "Breed deleted successfully: $breed_id";
-            } else {
-                echo "Error deleting breed: $breed_id";
-            }
-        } else {
-            echo "No breed ID provided.";
-        }
+        return $this->ToyModel->updateToy($id, $new_toy_name, $new_toy_price);
     }
+
+    public function deleteToy($id)
+    {
+        return $this->ToyModel->deleteToy($id);
+    }
+
 
 
     //  DISPLAY FUNCTION
     // make only one display function then add as you go and call it in the controller
     public function display()
     {
-        $breeds = $this->BreedModel->getAllBreeds();
+        $toys = $this->getToys();
         include "views/petView.php";
     }
 }
@@ -81,22 +72,19 @@ $controller->display();
 
 
 if (isset($_POST['submit'])) {
-    $controller->addBreedType();
+    // $controller->addBreedType();
+    // $controller->addSpeciesType();
+    $controller->addToyType();
 }
 
-if (isset($_POST['pet_breed_id'], $_POST['new_breed_name'])) {
-    $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
+if (isset($_POST['update'])) {
+    $controller->updateToy($_POST['update'], $_POST['new_toy_name'], $_POST['new_toy_price']);
 }
 
 if (isset($_POST['delete'])) {
-    $controller->deleteBreedType();
+    $controller->deleteToy($_POST['delete']);
 }
 
 
 // Calling petForm() only once regardless of whether 'submit' is set
 $controller->petForm();
-
-
-
-/* the display function is duplicating after insertion into the database. Previous table with old data will be displayed and a new table with the new data is also be displayed.
-*/

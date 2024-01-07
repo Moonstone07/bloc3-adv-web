@@ -31,6 +31,37 @@ CONTROLLER PAGE
     }
 
 
+    public function addSpeciesType()
+    {
+        if (!isset($_POST['species_name']) || empty($_POST['species_name'])) {
+            echo "Please enter a species name.";
+        } else {
+            $species_name = $_POST['species_name'];
+            $this->SpeciesModel->insertSpeciesType($species_name);
+            echo "Species added successfully: $species_name";
+        }
+    }
+
+    public function updateSpeciesName($id, $new_species_name)
+    {
+        return $this->SpeciesModel->updateSpeciesType($id, $new_species_name);
+    }
+
+    public function deleteSpeciesType()
+    {
+        if (isset($_POST['pet_species_id'])) {
+            $species_id = $_POST['pet_species_id'];
+            $result = $this->SpeciesModel->deleteSpeciesType($species_id);
+            if ($result) {
+                echo "Species deleted successfully: $species_id";
+            } else {
+                echo "Error deleting species: $species_id";
+            }
+        } else {
+            echo "No species ID provided.";
+        }
+    }
+
 
     //  PET TABLE MODEL
     public function addPet()
@@ -79,17 +110,11 @@ if (isset($_POST['submit'])) {
 // }
 
 
-    public function updateBreedForm()
-    {
-        $breed_id = $_POST['breed_id'];
-        $breed = $this->BreedModel->($breed_id); // get breed by id
-        include 'views/updateBreedForm.php';
-    }
+
 
 
 
 MODEL PAGE
-
 class SpeciesModel
 {
     private $mysqli;

@@ -1,26 +1,24 @@
 <section class="container">
 
     <?php
-    if ($breeds) {
 
-        echo "<table border='1'>";
-        echo "<tr>
-        <th>ID</th>
-        <th>Breed Type</th>
-        <th>Update</th>
-    </tr>";
-        foreach ($breeds as $breed) {
-            echo "<td>" . $breed['pet_breed_id'] . "</td>";
-            echo "<td>" . $breed['pet_breed_name'] . "</td>";
-            echo "<td>";
-            include 'views/updateBreedForm.php';
-            echo "</td>";
+
+    if ($toys) {
+        echo "<table>";
+        echo "<tr><th>ID</th><th>Name</th><th>Price</th></tr>";
+
+        foreach ($toys as $toy) {
+            echo "<tr>";
+            echo "<td>" . $toy['pet_toy_id'] . "</td>";
+            echo "<td>" . $toy['pet_toy_name'] . "</td>";
+            echo "<td>" . $toy['pet_toy_price'] . "</td>";
             echo "</tr>";
         }
         echo "</table>";
     } else {
-        echo "No breed data found.";
+        echo "No toys found.";
     }
+
     ?>
 
 

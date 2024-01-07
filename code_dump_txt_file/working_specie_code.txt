@@ -1,17 +1,69 @@
-<?php
+CONTROLLER
+    private $SpeciesModel;
 
-ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+        $this->SpeciesModel = new SpeciesModel($conn);
 
-class ConnectionDA
-{
-    public function __construct(public $host, public $username, public $password, public $dbname)
+        $species = $this->SpeciesModel->getAllSpecies();
+
+    //  SPECIES TABLE MODEL
+
+    public function addSpeciesType()
     {
+        // Check if the POST request contains a 'name' field and it's not empty
+        if (!isset($_POST['name']) || empty($_POST['name'])) {
+            echo "Please enter a species name.";
+        } else {
+            // If it does, get the species name from the POST request
+            $species_name = $_POST['name'];
+            // Use the SpeciesModel to insert the new species into the database
+            $this->SpeciesModel->insertSpecies($species_name);
+            echo "Species added successfully: $species_name";
+        }
     }
+
+    public function updateSpeciesName($id, $new_species_name)
+    {
+        // Use the SpeciesModel to update the species in the database
+        // The $id parameter is the ID of the species to update
+        // The $new_species_name parameter is the new name for the species
+        return $this->SpeciesModel->updateSpecies($id, $new_species_name);
+    }
+
+    public function deleteSpeciesType()
+    {
+        // Check if the POST request contains a 'pet_species_id' field
+        if (isset($_POST['pet_species_id'])) {
+            // If it does, get the species ID from the POST request
+            $species_id = $_POST['pet_species_id'];
+            // Use the SpeciesModel to delete the species from the database
+            $result = $this->SpeciesModel->deleteSpecies($species_id);
+            if ($result) {
+                echo "Species deleted successfully: $species_id";
+            } else {
+                echo "Error deleting species: $species_id";
+            }
+        } else {
+            echo "No species ID provided.";
+        }
+    }
+
+        $species = $this->SpeciesModel->getAllSpecies();
+
+    $controller->addSpeciesType();
+
+// SPECIES
+
+if (isset($_POST['pet_species_id'], $_POST['new_species_name'])) {
+    $controller->updateSpeciesName($_POST['pet_species_id'], $_POST['new_species_name']);
+}
+
+if (isset($_POST['delete_species'])) {
+    $controller->deleteSpeciesType();
 }
 
 
+
+MODEL
 class SpeciesModel
 {
     private $mysqli;
@@ -133,105 +185,28 @@ class SpeciesModel
     }
 }
 
-class ToyModel
-{
-    private $mysqli;
-    private $ConnectionDA;
-    public function __construct($ConnectionDA)
-    {
-        $this->ConnectionDA = $ConnectionDA;
-    }
+VIEW
+    if ($species) {
 
-    public function connect()
-    {
-        try {
-            $mysqli = new mysqli(
-                $this->ConnectionDA->host,
-                $this->ConnectionDA->username,
-                $this->ConnectionDA->password,
-                $this->ConnectionDA->dbname
-            );
+        echo "<table border='1'>";
+        echo "<tr>
+        <th>ID</th>
+        <th>Species Type</th>
+        <th>Update</th>
 
-            if ($mysqli->connect_error) {
-                throw new Exception("could not connect");
-            }
-            return $mysqli;
-        } catch (Exception $e) {
-            return false;
+    </tr>";
+        foreach ($species as $specie) {
+            echo "<td>" . $specie['pet_species_id'] . "</td>";
+            echo "<td>" . $specie['pet_species_type'] . "</td>";
+            echo "<td>";
+            include 'views/updateSpeciesTypeForm.php';
+            echo "</td>";
+            echo "</tr>";
         }
-    }
-
-    public function getToys()
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $result = $mysqli->query("SELECT * FROM pet_toy");
-            $results = array();
-            while ($row = $result->fetch_assoc()) {
-                $results[] = $row;
-            }
-            $mysqli->close();
-            return $results;
-        } else {
-            return false;
-        }
-    }
-
-    public function insertToy($pet_toy_name, $pet_toy_price)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $sql = "INSERT INTO pet_toy (pet_toy_name, pet_toy_price) VALUES ('$pet_toy_name', $pet_toy_price)";
-            if ($mysqli->query($sql) === TRUE) {
-                $mysqli->close();
-                return true;
-            } else {
-                echo "Error: " . $mysqli->error;
-                $mysqli->close();
-                return false;
-            }
-        } else {
-            return false;
-        }
+        echo "</table>";
+    } else {
+        echo "No species data found.";
     }
 
 
-    public function updateToy($id, $new_toy_name, $new_toy_price)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $sql = "UPDATE pet_toy SET pet_toy_name = '$new_toy_name', pet_toy_price = $new_toy_price WHERE pet_toy_id = $id";
-            if ($mysqli->query($sql) === TRUE) {
-                $mysqli->close();
-                return true;
-            } else {
-                echo "Error: " . $mysqli->error;
-                $mysqli->close();
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    public function deleteToy($id)
-    {
-        $mysqli = $this->connect();
-        if ($mysqli) {
-            $sql = "DELETE FROM pet_toy WHERE pet_toy_id = $id";
-            if ($mysqli->query($sql) === TRUE) {
-                $mysqli->close();
-                return true;
-            } else {
-                echo "Error: " . $mysqli->error;
-                $mysqli->close();
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-}
-
-?>
 
