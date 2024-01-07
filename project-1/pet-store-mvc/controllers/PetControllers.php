@@ -41,6 +41,21 @@ class PetController
         return $this->BreedModel->updateBreed($id, $new_breed_name);
     }
 
+    public function deleteBreedType()
+    {
+        if (isset($_POST['pet_breed_id'])) {
+            $breed_id = $_POST['pet_breed_id'];
+            $result = $this->BreedModel->deleteBreed($breed_id);
+            if ($result) {
+                echo "Breed deleted successfully: $breed_id";
+            } else {
+                echo "Error deleting breed: $breed_id";
+            }
+        } else {
+            echo "No breed ID provided.";
+        }
+    }
+
 
     //  DISPLAY FUNCTION
     // make only one display function then add as you go and call it in the controller
@@ -73,6 +88,9 @@ if (isset($_POST['pet_breed_id'], $_POST['new_breed_name'])) {
     $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
 }
 
+if (isset($_POST['delete'])) {
+    $controller->deleteBreedType();
+}
 
 
 // Calling petForm() only once regardless of whether 'submit' is set
