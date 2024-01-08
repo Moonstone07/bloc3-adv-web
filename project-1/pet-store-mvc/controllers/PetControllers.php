@@ -22,17 +22,41 @@ class PetController
 
     public function petForm()
     {
+        $pets = $this->PetModel->getAllPets();
+        $species = $this->SpeciesModel->getAllSpecies();
+        $breeds = $this->BreedModel->getAllBreeds();
+        $toys = $this->getToys();
         include "views/petForm.php";
+    }
+
+    //  DISPLAY FUNCTION
+    // make only one display function then add as you go and call it in the controller
+    public function display()
+    {
+        $pets = $this->PetModel->getAllPets();
+        $species = $this->SpeciesModel->getAllSpecies();
+        $breeds = $this->BreedModel->getAllBreeds();
+        $toys = $this->getToys();
+        include "views/petView.php";
     }
 
     //  PET TABLE MODEL
     public function addPet()
     {
-        if (isset($_POST['pet_name'], $_POST['pet_gender'], $_POST['pet_age'], $_POST['pet_color'], $_POST['breed_id'], $_POST['species_id'])) {
-            $pet_name = $_POST['pet_name'];
-            $pet_gender = $_POST['pet_gender'];
-            $pet_age = $_POST['pet_age'];
-            $pet_color = $_POST['pet_color'];
+        // var_dump($_POST);
+
+        // var_dump(isset($_POST['name']));
+        // var_dump(isset($_POST['gender']));
+        // var_dump(isset($_POST['age']));
+        // var_dump(isset($_POST['color']));
+        // var_dump(isset($_POST['breed_id']));
+        // var_dump(isset($_POST['species_id']));
+
+        if (isset($_POST['name'], $_POST['gender'], $_POST['age'], $_POST['color'], $_POST['breed_id'], $_POST['species_id'])) {
+            $pet_name = $_POST['name'];
+            $pet_gender = $_POST['gender'];
+            $pet_age = $_POST['age'];
+            $pet_color = $_POST['color'];
             $breed_id = $_POST['breed_id'];
             $species_id = $_POST['species_id'];
             $result = $this->PetModel->insertPet($pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id);
@@ -156,17 +180,6 @@ class PetController
         } else {
             echo "No toy ID provided.";
         }
-    }
-
-    //  DISPLAY FUNCTION
-    // make only one display function then add as you go and call it in the controller
-    public function display()
-    {
-        $pets = $this->PetModel->getAllPets();
-        $species = $this->SpeciesModel->getAllSpecies();
-        $breeds = $this->BreedModel->getAllBreeds();
-        $toys = $this->getToys();
-        include "views/petView.php";
     }
 }
 
