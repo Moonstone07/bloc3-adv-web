@@ -88,7 +88,75 @@ class PetController
         }
     }
 
+    //  BREED TABLE MODEL
 
+    public function addBreedType()
+    {
+        if (!isset($_POST['name']) || empty($_POST['name'])) {
+            echo "Please enter a breed name.";
+        } else {
+            $breed_name = $_POST['name'];
+            $this->BreedModel->insertBreed($breed_name);
+            echo "Breed added successfully: $breed_name";
+        }
+    }
+
+    public function updateBreedName($id, $new_breed_name)
+    {
+        return $this->BreedModel->updateBreed($id, $new_breed_name);
+    }
+
+    public function deleteBreedType()
+    {
+        if (isset($_POST['pet_breed_id'])) {
+            $breed_id = $_POST['pet_breed_id'];
+            $result = $this->BreedModel->deleteBreed($breed_id);
+            if ($result) {
+                echo "Breed deleted successfully: $breed_id";
+            } else {
+                echo "Error deleting breed: $breed_id";
+            }
+        } else {
+            echo "No breed ID provided.";
+        }
+    }
+
+    //  TOY TABLE MODEL
+
+    public function addToyType()
+    {
+        if (isset($_POST['name']) && isset($_POST['price'])) {
+            $toy_name = $_POST['name'];
+            $toy_price = $_POST['price'];
+            $this->ToyModel->insertToy($toy_name, $toy_price);
+        } else {
+            echo "Toy name or price not provided.";
+        }
+    }
+    public function getToys()
+    {
+        return $this->ToyModel->getToys();
+    }
+
+    public function updateToyName($id, $new_toy_name)
+    {
+        return $this->ToyModel->updateToy($id, $new_toy_name);
+    }
+
+    public function deleteToyType()
+    {
+        if (isset($_POST['pet_toy_id'])) {
+            $toy_id = $_POST['pet_toy_id'];
+            $result = $this->ToyModel->deleteToy($toy_id);
+            if ($result) {
+                echo "Toy deleted successfully: $toy_id";
+            } else {
+                echo "Error deleting toy: $toy_id";
+            }
+        } else {
+            echo "No toy ID provided.";
+        }
+    }
 
     //  DISPLAY FUNCTION
     // make only one display function then add as you go and call it in the controller
@@ -97,7 +165,7 @@ class PetController
         $pets = $this->PetModel->getAllPets();
         $species = $this->SpeciesModel->getAllSpecies();
         $breeds = $this->BreedModel->getAllBreeds();
-        $toys = $this->ToyModel->getAllToys();
+        $toys = $this->getToys();
         include "views/petView.php";
     }
 }
@@ -121,6 +189,30 @@ if (isset($_POST['submit'])) {
     $controller->addSpeciesType();
     $controller->addBreedType();
     $controller->addToyType();
+}
+
+if (isset($_POST['pet_species_id'], $_POST['new_species_name'])) {
+    $controller->updateSpeciesName($_POST['pet_species_id'], $_POST['new_species_name']);
+}
+
+if (isset($_POST['delete_species'])) {
+    $controller->deleteSpeciesType();
+}
+
+if (isset($_POST['pet_breed_id'], $_POST['new_breed_name'])) {
+    $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
+}
+
+if (isset($_POST['delete'])) {
+    $controller->deleteBreedType();
+}
+
+if (isset($_POST['pet_toy_id'], $_POST['new_toy_name'])) {
+    $controller->updateToyName($_POST['pet_toy_id'], $_POST['new_toy_name']);
+}
+
+if (isset($_POST['delete'])) {
+    $controller->deleteToyType();
 }
 
 
