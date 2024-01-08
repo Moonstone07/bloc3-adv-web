@@ -30,7 +30,6 @@ CONTROLLER PAGE
         // $this->display();
     }
 
-
     public function addSpeciesType()
     {
         if (!isset($_POST['species_name']) || empty($_POST['species_name'])) {
