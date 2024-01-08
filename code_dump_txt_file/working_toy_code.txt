@@ -1,7 +1,212 @@
 CONTROLLER
+    private $ToyModel;
+
+        $this->ToyModel = new ToyModel($conn);
+
+    // TOYS
+
+    public function addToyType()
+    {
+        if (isset($_POST['name']) && isset($_POST['price'])) {
+            $toy_name = $_POST['name'];
+            $toy_price = $_POST['price'];
+            $this->ToyModel->insertToy($toy_name, $toy_price);
+        } else {
+            echo "Toy name or price not provided.";
+        }
+    }
+    public function getToys()
+    {
+        return $this->ToyModel->getToys();
+    }
+
+public function updateToyName($id, $new_toy_name)
+{
+    return $this->ToyModel->updateToy($id, $new_toy_name);
+}
+
+public function deleteToyType()
+{
+    if (isset($_POST['pet_toy_id'])) {
+        $toy_id = $_POST['pet_toy_id'];
+        $result = $this->ToyModel->deleteToy($toy_id);
+        if ($result) {
+            echo "Toy deleted successfully: $toy_id";
+        } else {
+            echo "Error deleting toy: $toy_id";
+        }
+    } else {
+        echo "No toy ID provided.";
+    }
+}
+
+    $controller->addToyType();
+
+        $toys = $this->getToys();
+
+
+if (isset($_POST['pet_toy_id'], $_POST['new_toy_name'])) {
+    $controller->updateToyName($_POST['pet_toy_id'], $_POST['new_toy_name']);
+}
+
+if (isset($_POST['delete'])) {
+    $controller->deleteToyType();
+}
 
 MODEL
+class ToyModel
+{
+    private $mysqli;
+    private $ConnectionDA;
+    public function __construct($ConnectionDA)
+    {
+        $this->ConnectionDA = $ConnectionDA;
+    }
+
+    public function connect()
+    {
+        try {
+            $mysqli = new mysqli(
+                $this->ConnectionDA->host,
+                $this->ConnectionDA->username,
+                $this->ConnectionDA->password,
+                $this->ConnectionDA->dbname
+            );
+
+            if ($mysqli->connect_error) {
+                throw new Exception("could not connect");
+            }
+            return $mysqli;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function getToys()
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $result = $mysqli->query("SELECT * FROM pet_toy");
+            $results = array();
+            while ($row = $result->fetch_assoc()) {
+                $results[] = $row;
+            }
+            $mysqli->close();
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertToy($pet_toy_name, $pet_toy_price)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "INSERT INTO pet_toy (pet_toy_name, pet_toy_price) VALUES ('$pet_toy_name', $pet_toy_price)";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+    public function updateToy($id, $new_toy_name)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "UPDATE pet_toy SET pet_toy_name = '$new_toy_name' WHERE pet_toy_id = $id";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteToy($id)
+    {
+        $mysqli = $this->connect();
+        if ($mysqli) {
+            $sql = "DELETE FROM pet_toy WHERE pet_toy_id = $id";
+            if ($mysqli->query($sql) === TRUE) {
+                $mysqli->close();
+                return true;
+            } else {
+                echo "Error: " . $mysqli->error;
+                $mysqli->close();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+}
 
 VIEW
+<section class="container">
 
-FORM
+    <?php
+
+
+    if ($toys) {
+        echo "<table>";
+        echo "<tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Update</th>
+        </tr>";
+
+        foreach ($toys as $toy) {
+            echo "<tr>";
+            echo "<td>" . $toy['pet_toy_id'] . "</td>";
+            echo "<td>" . $toy['pet_toy_name'] . "</td>";
+            echo "<td>" . $toy['pet_toy_price'] . "</td>";
+            echo "<td>";
+            include 'views/updateToyForm.php';
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "No toys found.";
+    }
+
+    ?>
+
+
+</section>
+
+FORM ADD
+            <h3>Add a toy</h3>
+            <form method="POST">
+                <label for="name">Toy:</label>
+                <input type="text" id="name" name="name" required">
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price" required">
+
+                <input type="submit" name="submit" value="Submit">
+                <input type="reset" name="reset" value="Reset">
+            </form>
+
+FORM UPDATE/DELETE
+<form method='POST'>
+    <input type='hidden' name='pet_toy_id' value='<?php echo $toy['pet_toy_id']; ?>'>
+    <input type='text' name='new_toy_name' placeholder='New Toy Name'>
+    <input type='submit' name='update' value='Update Toy'>
+    <input type='hidden' name='delete_toy' value='<?php echo $toy['pet_toy_id']; ?>'>
+    <input type='submit' name='delete' value='Delete Toy'>
+    <input type='reset' name='reset' value='Reset'>
+</form>
