@@ -204,6 +204,8 @@ if (isset($_POST['submit'])) {
     $controller->addToyType();
 }
 
+// information inserting into the corresponding table and incorrect tables 
+
 if (isset($_POST['pet_species_id'], $_POST['new_species_name'])) {
     $controller->updateSpeciesName($_POST['pet_species_id'], $_POST['new_species_name']);
 }
