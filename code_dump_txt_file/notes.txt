@@ -1,0 +1,6 @@
+- how do i display the information entered in the table without a lag
+-- the operation should always be before the display
+- how can i display the breed and species name and not the n#
+- how can i create a navigation between each views
+- how to i place elements in a specific way on the page
+- how can i better style the page 

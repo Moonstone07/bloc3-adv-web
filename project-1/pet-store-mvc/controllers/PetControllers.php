@@ -61,7 +61,7 @@ class PetController
             $species_id = $_POST['species_id'];
             $result = $this->PetModel->insertPet($pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id);
             if ($result) {
-                echo "Pet added successfully";
+                echo "Pet added successfully $pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id";
             } else {
                 echo "Error adding pet";
             }
@@ -194,41 +194,32 @@ $connect2DA = new ConnectionDA(
 
 $controller = new PetController($connect2DA);
 
+
+if (isset($_POST['submit']) || $_POST['submit'] == 'petForm') {
+    $controller->addPet();
+}
+
 $controller->display();
 
 
-if (isset($_POST['submit'])) {
-    $controller->addPet();
-    $controller->addSpeciesType();
-    $controller->addBreedType();
-    $controller->addToyType();
-}
 
-// pet information inserting into the corresponding table and incorrect tables (species, breed, toy) don't know why
 
-if (isset($_POST['pet_species_id'], $_POST['new_species_name'])) {
-    $controller->updateSpeciesName($_POST['pet_species_id'], $_POST['new_species_name']);
-}
+// This is a routing mechanism that will include the correct view based on the URL
 
-if (isset($_POST['delete_species'])) {
-    $controller->deleteSpeciesType();
-}
+// if (!isset($_GET['controller']) || $_GET['controller'] == "home") {
+//     include("views/welcome.php");
+// } else if ($_GET['controller'] == "login") {
+//     include("views/login.php");
+// } else if ($_GET['controller'] == "dashboard") {
+//     include("views/dashboard.php");
+// } else if ($_GET['controller'] == "logout") {
+//     include("views/logout.php");
+// } else {
+//     include("views/404.php");
+// }
 
-if (isset($_POST['pet_breed_id'], $_POST['new_breed_name'])) {
-    $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
-}
 
-if (isset($_POST['delete'])) {
-    $controller->deleteBreedType();
-}
 
-if (isset($_POST['pet_toy_id'], $_POST['new_toy_name'])) {
-    $controller->updateToyName($_POST['pet_toy_id'], $_POST['new_toy_name']);
-}
-
-if (isset($_POST['delete'])) {
-    $controller->deleteToyType();
-}
 
 
 // Calling petForm() only once regardless of whether 'submit' is set

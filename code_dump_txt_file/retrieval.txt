@@ -1,0 +1,49 @@
+// if (isset($_POST['pet_species_id'], $_POST['new_species_name'])) {
+//     $controller->updateSpeciesName($_POST['pet_species_id'], $_POST['new_species_name']);
+// }
+
+// if (isset($_POST['delete_species'])) {
+//     $controller->deleteSpeciesType();
+// }
+
+// if (isset($_POST['pet_breed_id'], $_POST['new_breed_name'])) {
+//     $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
+// }
+
+// if (isset($_POST['delete'])) {
+//     $controller->deleteBreedType();
+// }
+
+// if (isset($_POST['pet_toy_id'], $_POST['new_toy_name'])) {
+//     $controller->updateToyName($_POST['pet_toy_id'], $_POST['new_toy_name']);
+// }
+
+// if (isset($_POST['delete'])) {
+//     $controller->deleteToyType();
+// }
+
+
+if (isset($_POST['pet_species_id'], $_POST['new_species_name'])) {
+    $controller->updateSpeciesName($_POST['pet_species_id'], $_POST['new_species_name']);
+} else if (isset($_POST['delete_species'])) {
+    $controller->deleteSpeciesType();
+} else if (isset($_POST['pet_breed_id'], $_POST['new_breed_name'])) {
+    $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
+} else if (isset($_POST['delete'])) {
+    $controller->deleteBreedType();
+} else if (isset($_POST['pet_toy_id'], $_POST['new_toy_name'])) {
+    $controller->updateToyName($_POST['pet_toy_id'], $_POST['new_toy_name']);
+} else if (isset($_POST['delete'])) {
+    $controller->deleteToyType();
+}
+
+
+// $controller->addSpeciesType();
+// $controller->addBreedType();
+// $controller->addToyType();
+// I need to tell the controller to update the corresponding table and not the pet table. by checking the path. Right now it's doing all at once and not one by one. This code at the bottom needs to be fixed.
+
+
+// if (isset($_GET['PetController']) || $_GET['PetController'] == "petForm") {
+//     include "views/petForm.php";
+// }
