@@ -7,6 +7,13 @@ include_once 'models/model.php';
 
 class PetController
 {
+    // menu links
+    public function menu() {
+        include "views/petMenuLinks.php";
+    }
+
+
+    //  MODEL INSTANCES
     private $PetModel;
     private $SpeciesModel;
     private $BreedModel;
@@ -20,24 +27,21 @@ class PetController
         $this->ToyModel = new ToyModel($conn);
     }
 
-    public function petForm()
+    // display all pets
+
+    public function displayPets()
     {
+        // Get all pets from the database
         $pets = $this->PetModel->getAllPets();
-        $species = $this->SpeciesModel->getAllSpecies();
-        $breeds = $this->BreedModel->getAllBreeds();
-        $toys = $this->getToys();
-        include "views/petForm.php";
+        // Include the view file
+        include "views/petView.php";
     }
 
-    //  DISPLAY FUNCTION
-    // make only one display function then add as you go and call it in the controller
-    public function display()
+    // ADD PET FORM
+
+    public function petForm()
     {
-        $pets = $this->PetModel->getAllPets();
-        $species = $this->SpeciesModel->getAllSpecies();
-        $breeds = $this->BreedModel->getAllBreeds();
-        $toys = $this->getToys();
-        include "views/petView.php";
+        include "views/petForm.php";
     }
 
     //  PET TABLE MODEL
@@ -70,7 +74,18 @@ class PetController
         }
     }
 
+
+
     //  SPECIES TABLE MODEL
+
+    public function displaySpecies()
+    {
+        // Get all species from the database
+        $species = $this->SpeciesModel->getAllSpecies();
+        // var_dump($species);
+        // Include the view file
+        include "views/speciesView.php";
+    }
 
     public function addSpeciesType()
     {
@@ -92,6 +107,7 @@ class PetController
         // The $id parameter is the ID of the species to update
         // The $new_species_name parameter is the new name for the species
         return $this->SpeciesModel->updateSpecies($id, $new_species_name);
+        include "views/updateSpeciesTypeForm.php";
     }
 
     public function deleteSpeciesType()
@@ -113,6 +129,14 @@ class PetController
     }
 
     //  BREED TABLE MODEL
+
+    public function displayBreeds()
+    {
+        // Get all breeds from the database
+        $breeds = $this->BreedModel->getAllBreeds();
+        // Include the view file
+        include "views/breedView.php";
+    }
 
     public function addBreedType()
     {
@@ -146,6 +170,14 @@ class PetController
     }
 
     //  TOY TABLE MODEL
+
+    public function displayToys()
+    {
+        // Get all toys from the database
+        $toys = $this->ToyModel->getToys();
+        // Include the view file
+        include "views/toyView.php";
+    }
 
     public function addToyType()
     {
@@ -194,33 +226,31 @@ $connect2DA = new ConnectionDA(
 
 $controller = new PetController($connect2DA);
 
+//  MENU LINKS
+$controller->menu();
 
-if (isset($_POST['submit']) || $_POST['submit'] == 'petForm') {
-    $controller->addPet();
+
+// controller for species table
+
+if (isset($_POST['submit_species'])) {
+    $controller->addSpeciesType();
+} else if (isset($_POST['delete_species'])) {
+    $controller->deleteSpeciesType();
+} else if (isset($_POST['update_species'])) {
+    $controller->updateSpeciesName( $_POST['pet_species_id'], $_POST['new_species_name']);
 }
 
-$controller->display();
 
 
+// SPECIES PAGE
 
+if (isset($_GET['page'])) {
+    if ($_GET['page'] == 'species') {
+        $controller->displaySpecies();
+    } else if ($_GET['page'] == 'addSpeciesType') {
+        include "views/addSpeciesForm.php";
+    } elseif ($_GET['page'] == 'updateSpecies') {
+        include "views/updateSpeciesTypeForm.php";
+    }
+}
 
-// This is a routing mechanism that will include the correct view based on the URL
-
-// if (!isset($_GET['controller']) || $_GET['controller'] == "home") {
-//     include("views/welcome.php");
-// } else if ($_GET['controller'] == "login") {
-//     include("views/login.php");
-// } else if ($_GET['controller'] == "dashboard") {
-//     include("views/dashboard.php");
-// } else if ($_GET['controller'] == "logout") {
-//     include("views/logout.php");
-// } else {
-//     include("views/404.php");
-// }
-
-
-
-
-
-// Calling petForm() only once regardless of whether 'submit' is set
-$controller->petForm();

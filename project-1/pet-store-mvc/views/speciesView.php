@@ -6,7 +6,7 @@ if ($species) {
     echo "<tr>
         <th>ID</th>
         <th>Species Type</th>
-        <th>Update</th>
+
 
     </tr>";
     foreach ($species as $specie) {
