@@ -17,7 +17,7 @@
 
             <li><a href="?page=addSpeciesType">add species</a></li>
 
-            <li><a href="?page=addBreed">add breed</a></li>
+            <li><a href="?page=addBreedType">add breed</a></li>
 
             <li><a href="?page=addToy">add toy</a></li>
         </ul>

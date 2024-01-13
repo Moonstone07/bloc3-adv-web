@@ -7,6 +7,7 @@ if ($toys) {
         <th>Name</th>
         <th>Price</th>
         <th>Update</th>
+        <th>Delete</th>
         </tr>";
 
     foreach ($toys as $toy) {
@@ -16,6 +17,9 @@ if ($toys) {
         echo "<td>" . $toy['pet_toy_price'] . "</td>";
         echo "<td>";
         include 'views/updateToyForm.php';
+        echo "</td>";
+        echo "<td>";
+        include 'views/deleteToyForm.php';
         echo "</td>";
         echo "</tr>";
     }

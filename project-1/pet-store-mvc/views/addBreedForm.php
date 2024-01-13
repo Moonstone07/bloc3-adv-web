@@ -1,8 +1,7 @@
 <h3>Add a breed</h3>
-<form method="POST">
+<form method="POST" action="?action=breed">
     <label for="name">breed:</label>
-    <input type="text" id="name" name="name" required">
+    <input type="text" id="name" name="name" required>
 
-    <input type="submit" name="submit" value="Submit">
-    <input type="reset" name="reset" value="Reset">
+    <input type="submit" name="submit_breed" value="Submit">
 </form>
