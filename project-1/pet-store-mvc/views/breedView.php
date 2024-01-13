@@ -7,12 +7,16 @@ if ($breeds) {
         <th>ID</th>
         <th>Breed Type</th>
         <th>Update</th>
+        <th>Delete</th>
     </tr>";
     foreach ($breeds as $breed) {
         echo "<td>" . $breed['pet_breed_id'] . "</td>";
         echo "<td>" . $breed['pet_breed_name'] . "</td>";
         echo "<td>";
         include 'views/updateBreedForm.php';
+        echo "</td>";
+        echo "<td>";
+        include 'views/deleteBreedForm.php';
         echo "</td>";
         echo "</tr>";
     }

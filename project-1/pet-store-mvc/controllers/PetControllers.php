@@ -273,9 +273,9 @@ if (isset($_GET['page'])) {
     } else if ($_GET['page'] == 'addBreedType') {
         include "views/addBreedForm.php";
     } elseif ($_GET['page'] == 'updateBreed') {
-        include "views/updateBreedTypeForm.php";
+        include "views/updateBreedForm.php";
     } elseif ($_GET['page'] == 'deleteBreed') {
-        include "views/deleteBreedTypeForm.php";
+        include "views/deleteBreedForm.php";
     }
 }
 
