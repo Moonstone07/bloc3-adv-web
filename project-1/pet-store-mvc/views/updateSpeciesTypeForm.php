@@ -7,7 +7,7 @@
     <input type='text' name='new_species_name' placeholder='New Species Name'>
     <input type='submit'name='update_species' value='Update Specie'>
 
-
+<!-- 
     <input type='hidden' name='delete_species' value='<?php echo $specie['pet_species_id']; ?>'>
-    <input type='submit' name='delete_species' value='Delete Specie'> 
+    <input type='submit' name='delete_species' value='Delete Specie'>  -->
 </form>

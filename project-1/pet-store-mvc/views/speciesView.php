@@ -15,6 +15,9 @@ if ($species) {
         echo "<td>";
         include 'views/updateSpeciesTypeForm.php';
         echo "</td>";
+        echo "<td>";
+        include 'views/deleteSpeciesTypeForm.php';
+        echo "</td>";
         echo "</tr>";
     }
     echo "</table>";

@@ -23,7 +23,7 @@
         </ul>
     </div>
 
-    <div class="updating">
+    <!-- <div class="updating">
         <ul>
             <li><a href="?page=updatePet">update pet</a></li>
 
@@ -33,7 +33,7 @@
 
             <li><a href="?page=updateToy">update toy</a></li>
         </ul>
-    </div>
+    </div> -->
 
     <!-- <div class="deleting">
         <ul>

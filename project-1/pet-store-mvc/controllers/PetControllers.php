@@ -251,6 +251,8 @@ if (isset($_GET['page'])) {
         include "views/addSpeciesForm.php";
     } elseif ($_GET['page'] == 'updateSpecies') {
         include "views/updateSpeciesTypeForm.php";
+    } elseif ($_GET['page'] == 'deleteSpecies') {
+        include "views/deleteSpeciesTypeForm.php";
     }
 }
 
