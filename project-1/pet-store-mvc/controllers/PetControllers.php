@@ -256,3 +256,48 @@ if (isset($_GET['page'])) {
     }
 }
 
+
+// controller for breed table
+if (isset($_POST['submit_breed'])) {
+    $controller->addBreedType();
+} else if (isset($_POST['delete_breed'])) {
+    $controller->deleteBreedType();
+} else if (isset($_POST['update_breed'])) {
+    $controller->updateBreedName($_POST['pet_breed_id'], $_POST['new_breed_name']);
+}
+
+// BREED PAGE
+if (isset($_GET['page'])) {
+    if ($_GET['page'] == 'breeds') {
+        $controller->displayBreeds();
+    } else if ($_GET['page'] == 'addBreedType') {
+        include "views/addBreedForm.php";
+    } elseif ($_GET['page'] == 'updateBreed') {
+        include "views/updateBreedTypeForm.php";
+    } elseif ($_GET['page'] == 'deleteBreed') {
+        include "views/deleteBreedTypeForm.php";
+    }
+}
+
+// controller for toy table
+if (isset($_POST['submit_toy'])) {
+    $controller->addToyType();
+} else if (isset($_POST['delete_toy'])) {
+    $controller->deleteToyType();
+} else if (isset($_POST['update_toy'])) {
+    $controller->updateToyName($_POST['pet_toy_id'], $_POST['new_toy_name']);
+}
+
+// TOY PAGE
+
+if (isset($_GET['page'])) {
+    if ($_GET['page'] == 'Toys') {
+        $controller->displayToys();
+    } else if ($_GET['page'] == 'addToy') {
+        include "views/addToyForm.php";
+    } elseif ($_GET['page'] == 'updateToy') {
+        include "views/updateToyForm.php";
+    } elseif ($_GET['page'] == 'deleteToy') {
+        include "views/deleteToyForm.php";
+    }
+}
