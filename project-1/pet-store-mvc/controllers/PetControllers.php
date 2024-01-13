@@ -185,6 +185,7 @@ class PetController
             $toy_name = $_POST['name'];
             $toy_price = $_POST['price'];
             $this->ToyModel->insertToy($toy_name, $toy_price);
+            echo "Toy added successfully: $toy_name, $toy_price";
         } else {
             echo "Toy name or price not provided.";
         }

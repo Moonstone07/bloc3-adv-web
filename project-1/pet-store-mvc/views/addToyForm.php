@@ -5,5 +5,5 @@
     <label for="price">Price:</label>
     <input type="number" id="price" name="price" step="0.01" required><br><br>
 
-    <input type="submit" value="Add Toy">
+    <input type="submit" name="submit_toy" value="Add Toy">
 </form>
