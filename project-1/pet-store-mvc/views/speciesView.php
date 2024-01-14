@@ -1,15 +1,15 @@
 <?php
-if (!empty($species)) {
+
+if ($species) {
+
     echo "<table border='1'>";
     echo "<tr>
         <th>ID</th>
         <th>Species Type</th>
-        <th>Update</th>
-        <th>Delete</th>
-    </tr>";
 
+
+    </tr>";
     foreach ($species as $specie) {
-        echo "<tr>";
         echo "<td>" . $specie['pet_species_id'] . "</td>";
         echo "<td>" . $specie['pet_species_type'] . "</td>";
         echo "<td>";
@@ -20,11 +20,9 @@ if (!empty($species)) {
         echo "</td>";
         echo "</tr>";
     }
-
     echo "</table>";
 } else {
     echo "No species data found.";
 }
 
-// var_dump($species);
 ?>

@@ -27,67 +27,15 @@ class PetController
         $this->ToyModel = new ToyModel($conn);
     }
 
-    //  PET TABLE VIEW
-    // display all pets
-
-    public function displayPets()
-    {
-        // var_dump($breeds);
-        // var_dump($species);
-
-        // Get all pets from the database
-        $pets = $this->PetModel->getAllPets();
-        // Include the view file
-        include "views/petView.php";
-    }
-
-    public function displayAddPetForm() {
-        $species = $this->SpeciesModel->getAllSpecies();
-        $breeds = $this->BreedModel->getAllBreeds();
-        include "views/addPetForm.php";
-    }
-
-    // add a pet
-    public function addPet()
-    {
-        // var_dump($_POST);
-
-        // var_dump(isset($_POST['name']));
-        // var_dump(isset($_POST['gender']));
-        // var_dump(isset($_POST['age']));
-        // var_dump(isset($_POST['color']));
-        // var_dump(isset($_POST['breed_id']));
-        // var_dump(isset($_POST['species_id']));
-
-        if (isset($_POST['name'], $_POST['gender'], $_POST['age'], $_POST['color'], $_POST['breed_id'], $_POST['species_id'])) {
-            $pet_name = $_POST['name'];
-            $pet_gender = $_POST['gender'];
-            $pet_age = $_POST['age'];
-            $pet_color = $_POST['color'];
-            $breed_id = $_POST['breed_id'];
-            $species_id = $_POST['species_id'];
-            $result = $this->PetModel->insertPet($pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id);
-            if ($result) {
-                echo "Pet added successfully $pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id";
-            } else {
-                echo "Error adding pet";
-            }
-        } else {
-            echo "All fields are required.";
-        }
-    }
-
     //  SPECIES TABLE MODEL
 
     public function displaySpecies()
     {
         // Get all species from the database
         $species = $this->SpeciesModel->getAllSpecies();
-        return $species;
         // var_dump($species);
         // Include the view file
         include "views/speciesView.php";
-        include "views/addPetForm.php";
     }
 
     public function addSpeciesType()
@@ -137,7 +85,6 @@ class PetController
     {
         // Get all breeds from the database
         $breeds = $this->BreedModel->getAllBreeds();
-        return $breeds;
         // var_dump($breeds);
         // Include the view file
         include "views/breedView.php";
@@ -171,6 +118,57 @@ class PetController
             }
         } else {
             echo "No breed ID provided.";
+        }
+    }
+
+    //  PET TABLE VIEW
+    // display all pets
+
+    public function displayPets()
+    {
+        // var_dump($breeds);
+        // var_dump($species);
+
+        // Get all pets from the database
+        $pets = $this->PetModel->getAllPets();
+        // Include the view file
+        include "views/petView.php";
+    }
+
+    public function displayAddPetForm()
+    {
+        $species = $this->SpeciesModel->getAllSpecies();
+        $breeds = $this->BreedModel->getAllBreeds();
+        include "views/addPetForm.php";
+    }
+
+    // add a pet
+    public function addPet()
+    {
+        // var_dump($_POST);
+
+        // var_dump(isset($_POST['name']));
+        // var_dump(isset($_POST['gender']));
+        // var_dump(isset($_POST['age']));
+        // var_dump(isset($_POST['color']));
+        // var_dump(isset($_POST['breed_id']));
+        // var_dump(isset($_POST['species_id']));
+
+        if (isset($_POST['name'], $_POST['gender'], $_POST['age'], $_POST['color'], $_POST['breed_id'], $_POST['species_id'])) {
+            $pet_name = $_POST['name'];
+            $pet_gender = $_POST['gender'];
+            $pet_age = $_POST['age'];
+            $pet_color = $_POST['color'];
+            $breed_id = $_POST['breed_id'];
+            $species_id = $_POST['species_id'];
+            $result = $this->PetModel->insertPet($pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id);
+            if ($result) {
+                echo "Pet added successfully $pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id";
+            } else {
+                echo "Error adding pet";
+            }
+        } else {
+            echo "All fields are required.";
         }
     }
 
