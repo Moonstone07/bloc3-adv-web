@@ -27,55 +27,6 @@ class PetController
         $this->ToyModel = new ToyModel($conn);
     }
 
-    // display all pets
-
-    public function displayPets()
-    {
-        // Get all pets from the database
-        $pets = $this->PetModel->getAllPets();
-        // Include the view file
-        include "views/petView.php";
-    }
-
-    // ADD PET FORM
-
-    public function petForm()
-    {
-        include "views/petForm.php";
-    }
-
-    //  PET TABLE MODEL
-    public function addPet()
-    {
-        // var_dump($_POST);
-
-        // var_dump(isset($_POST['name']));
-        // var_dump(isset($_POST['gender']));
-        // var_dump(isset($_POST['age']));
-        // var_dump(isset($_POST['color']));
-        // var_dump(isset($_POST['breed_id']));
-        // var_dump(isset($_POST['species_id']));
-
-        if (isset($_POST['name'], $_POST['gender'], $_POST['age'], $_POST['color'], $_POST['breed_id'], $_POST['species_id'])) {
-            $pet_name = $_POST['name'];
-            $pet_gender = $_POST['gender'];
-            $pet_age = $_POST['age'];
-            $pet_color = $_POST['color'];
-            $breed_id = $_POST['breed_id'];
-            $species_id = $_POST['species_id'];
-            $result = $this->PetModel->insertPet($pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id);
-            if ($result) {
-                echo "Pet added successfully $pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id";
-            } else {
-                echo "Error adding pet";
-            }
-        } else {
-            echo "All fields are required.";
-        }
-    }
-
-
-
     //  SPECIES TABLE MODEL
 
     public function displaySpecies()
@@ -134,6 +85,7 @@ class PetController
     {
         // Get all breeds from the database
         $breeds = $this->BreedModel->getAllBreeds();
+        var_dump($breeds);
         // Include the view file
         include "views/breedView.php";
     }
@@ -214,6 +166,50 @@ class PetController
             echo "No toy ID provided.";
         }
     }
+
+    //  PET TABLE VIEW
+    // display all pets
+
+    public function displayPets()
+    {
+        // Get all species and breeds from the database
+        // $species = $this->displaySpecies();
+        // $breeds = $this->displayBreeds();
+        // Get all pets from the database
+        $pets = $this->PetModel->getAllPets();
+        // Include the view file
+        include "views/petView.php";
+    }
+
+    //  PET TABLE MODEL
+    public function addPet()
+    {
+        // var_dump($_POST);
+
+        // var_dump(isset($_POST['name']));
+        // var_dump(isset($_POST['gender']));
+        // var_dump(isset($_POST['age']));
+        // var_dump(isset($_POST['color']));
+        // var_dump(isset($_POST['breed_id']));
+        // var_dump(isset($_POST['species_id']));
+
+        if (isset($_POST['name'], $_POST['gender'], $_POST['age'], $_POST['color'], $_POST['breed_id'], $_POST['species_id'])) {
+            $pet_name = $_POST['name'];
+            $pet_gender = $_POST['gender'];
+            $pet_age = $_POST['age'];
+            $pet_color = $_POST['color'];
+            $breed_id = $_POST['breed_id'];
+            $species_id = $_POST['species_id'];
+            $result = $this->PetModel->insertPet($pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id);
+            if ($result) {
+                echo "Pet added successfully $pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id";
+            } else {
+                echo "Error adding pet";
+            }
+        } else {
+            echo "All fields are required.";
+        }
+    }
 }
 
 
@@ -231,8 +227,22 @@ $controller = new PetController($connect2DA);
 $controller->menu();
 
 
-// controller for species table
+// controller for pet table
 
+if (isset($_POST['submit_pet'])) {
+    $controller->addPet();
+}
+
+// PET PAGE
+if (isset($_GET['page'])) {
+    if ($_GET['page'] == 'pets') {
+        $controller->displayPets();
+    } else if ($_GET['page'] == 'addPet') {
+        include "views/addPetForm.php";
+    }
+}
+
+// controller for species table
 if (isset($_POST['submit_species'])) {
     $controller->addSpeciesType();
 } else if (isset($_POST['delete_species'])) {
@@ -241,10 +251,7 @@ if (isset($_POST['submit_species'])) {
     $controller->updateSpeciesName( $_POST['pet_species_id'], $_POST['new_species_name']);
 }
 
-
-
 // SPECIES PAGE
-
 if (isset($_GET['page'])) {
     if ($_GET['page'] == 'species') {
         $controller->displaySpecies();
@@ -280,6 +287,7 @@ if (isset($_GET['page'])) {
     }
 }
 
+
 // controller for toy table
 if (isset($_POST['submit_toy'])) {
     $controller->addToyType();
@@ -290,7 +298,6 @@ if (isset($_POST['submit_toy'])) {
 }
 
 // TOY PAGE
-
 if (isset($_GET['page'])) {
     if ($_GET['page'] == 'Toys') {
         $controller->displayToys();
