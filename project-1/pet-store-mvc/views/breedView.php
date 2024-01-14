@@ -1,7 +1,6 @@
 <?php
-
-if ($breeds) {
-
+if (!isset($breeds)) {
+    $breeds = array();
     echo "<table border='1'>";
     echo "<tr>
         <th>ID</th>
@@ -9,7 +8,9 @@ if ($breeds) {
         <th>Update</th>
         <th>Delete</th>
     </tr>";
+
     foreach ($breeds as $breed) {
+        echo "<tr>";
         echo "<td>" . $breed['pet_breed_id'] . "</td>";
         echo "<td>" . $breed['pet_breed_name'] . "</td>";
         echo "<td>";
@@ -20,9 +21,9 @@ if ($breeds) {
         echo "</td>";
         echo "</tr>";
     }
+
     echo "</table>";
 } else {
     echo "No breed data found.";
 }
-
 ?>

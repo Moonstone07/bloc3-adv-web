@@ -1,7 +1,7 @@
 <section class="wrapper">
 
     <h3>Add a pet</h3>
-    <form method="POST" action="?action=pet">
+    <form method="POST" action="?action=addPet">
         <label for="name">name:</label>
         <input type="text" id="name" name="name" required>
 
@@ -20,14 +20,15 @@
                 <option value="<?= $breed['pet_breed_id'] ?>"><?= $breed['pet_breed_name'] ?></option>
             <?php endforeach; ?>
         </select>
-
         <label for="pet_species_type">species:</label>
         <select name="species_id">
             <?php foreach ($species as $specie) : ?>
-                <option value="<?= $specie['pet_species_id'] ?>"> <?= $specie['pet_species_type'] ?> </option>
+                <option value="<?= $specie['pet_species_id'] ?>"><?= $specie['pet_species_type'] ?></option>
             <?php endforeach; ?>
         </select>
+
 
         <input type="submit" name="submit_pet" value="Submit">
     </form>
 </section>
+
