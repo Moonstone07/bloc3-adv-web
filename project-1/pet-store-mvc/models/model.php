@@ -57,6 +57,9 @@ class PetModel
     //     }
     // }
 
+
+
+    // creates an array of all pets with their breed and species in duplicates
     public function getAllPets()
     {
         $mysqli = $this->connect();
