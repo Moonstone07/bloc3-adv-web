@@ -41,11 +41,34 @@ class PetModel
 
 
     // select all pets from the database to display
+    // public function getAllPets()
+    // {
+    //     $mysqli = $this->connect();
+    //     if ($mysqli) {
+    //         $result = $mysqli->query("SELECT * FROM pets");
+    //         $results = array();
+    //         while ($row = $result->fetch_assoc()) {
+    //             $results[] = $row;
+    //         }
+    //         $mysqli->close();
+    //         return $results;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     public function getAllPets()
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            $result = $mysqli->query("SELECT * FROM pets");
+            $query = "
+            SELECT pets.*, pet_breed.pet_breed_name, pet_species.pet_species_type
+            FROM pets
+            NATURAL JOIN pet_breed
+            NATURAL JOIN pet_species
+            ORDER BY pets.pet_id ASC
+        ";
+            $result = $mysqli->query($query);
             $results = array();
             while ($row = $result->fetch_assoc()) {
                 $results[] = $row;
@@ -76,8 +99,6 @@ class PetModel
             return false;
         }
     }
-
-
 }
 
 class SpeciesModel
@@ -398,9 +419,3 @@ class ToyModel
         }
     }
 }
-
-
-
-
-?>
-

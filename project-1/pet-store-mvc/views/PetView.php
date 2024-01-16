@@ -16,8 +16,10 @@ if ($pets) {
         echo "<td>" . $pet['pet_name'] . "</td>";
         echo "<td>" . $pet['pet_age'] . "</td>";
         echo "<td>" . $pet['pet_color'] . "</td>";
-        echo "<td>" . $pet['breed_id'] . "</td>";
-        echo "<td>" . $pet['species_id'] . "</td>";
+        echo "<td>" . $pet['pet_breed_name'];
+        echo "<td>" . $pet['pet_species_type'];
+        // echo "<td>" . $pet['breed_id'] . "</td>";
+        // echo "<td>" . $pet['species_id'] . "</td>";
         echo "</tr>";
     }
 
@@ -25,4 +27,3 @@ if ($pets) {
 } else {
     echo "No pet data found.";
 }
-?>
