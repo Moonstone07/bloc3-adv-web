@@ -1,10 +1,24 @@
 body {
+    height: 100vh;
     font-family: Arial, sans-serif;
+    background: url('https://images2.alphacoders.com/133/1335809.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 60px;
 }
 
-/* section {
-    padding: 50px;
-} */
+h1 {
+    text-align: center;
+    color: #2a1912;
+}
+
+h3 {
+    text-align: center;
+    color: #fff;
+}
 
 div {
     padding: 10px;
@@ -22,17 +36,27 @@ ul li a {
     color: #fff;
     margin : 10px;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #2a1912;
     border-radius: 5px;
 }
 
 form {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto;
     width: 50%;
     padding: 10px;
-    /* border: 1px solid #ccc; */
     border-radius: 4px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #fff;
 }
 
 input[type=text],
@@ -48,7 +72,7 @@ select {
 
 input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #2a1912;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -58,7 +82,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: gray;
+    background-color: #ff9667;
 }
 
 .container {
@@ -68,7 +92,7 @@ input[type=submit]:hover {
     align-items: center;
     gap: 20px;
     border-radius: 5px;
-    background-color: rgb(102, 136, 126);
+    background-color: #925a3e;
     padding: 20px;
 }
 
@@ -77,16 +101,17 @@ table {
 }
 
 table tr {
-    background-color: #f2f2f2;
+    background-color: #f2f2f2a3;
 }
 
 table tr:nth-child(even) {
-    background-color: #e6e6e6;
+    background-color: #ff97677f;
 }
 
 .wrapper {
     border-radius: 5px;
-    background-color: rgb(182, 228, 214);
+    background-color: #925a3e;
+    opacity: 0.8;
     padding: 20px;
 }
 
@@ -96,4 +121,14 @@ table tr:nth-child(even) {
     align-items: center;
     gap: 20px;
     padding: 20px;
+}
+
+#delete_btn {
+    background-color: red;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }

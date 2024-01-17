@@ -3,5 +3,5 @@
     <label for="name">specie:</label>
     <input type="text" id="name" name="name" required>
 
-    <button type="submit" name="submit_species" class="btn">Submit</button>
+    <input type="submit" name="submit_species" value="Submit">
 </form>

@@ -57,9 +57,32 @@ class PetModel
     //     }
     // }
 
+    //The code is missing a comma in the SELECT statement and the table name is not specified correctly.
+
+    // Fatal error: Uncaught Error: Call to a member function fetch_assoc() on bool in /var/www/vhosts/tischa79.web582.com/httpdocs/block3-adv-web/project-1/pet-store-mvc/models/model.php:71 Stack trace: #0 /var/www/vhosts/tischa79.web582.com/httpdocs/block3-adv-web/project-1/pet-store-mvc/controllers/PetControllers.php(133): PetModel->getAllPets() #1 /var/www/vhosts/tischa79.web582.com/httpdocs/block3-adv-web/project-1/pet-store-mvc/controllers/PetControllers.php(318): PetController->displayPets() #2 /var/www/vhosts/tischa79.web582.com/httpdocs/block3-adv-web/project-1/pet-store-mvc/index.php(15): include_once('...') #3 {main} thrown in /var/www/vhosts/tischa79.web582.com/httpdocs/block3-adv-web/project-1/pet-store-mvc/models/model.php on line 71
+    // public function getAllPets()
+    // {
+    //     $mysqli = $this->connect();
+    //     if ($mysqli) {
+    //         $result = $mysqli->query("SELECT * pets, pet_breed.pet_breed_name, pet_species.pet_species_type
+    //         FROM pets
+    //         NATURAL JOIN pet_breed
+    //         NATURAL JOIN pet_species
+    //         ORDER BY pets.pet_id ASC");
+    //         $results = array();
+    //         while ($row = $result->fetch_assoc()) {
+    //             $results[] = $row;
+    //         }
+    //         $mysqli->close();
+    //         return $results;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
 
-    // creates an array of all pets with their breed and species in duplicates
+
+     // creates an array of all pets with their breed and species in duplicates
     public function getAllPets()
     {
         $mysqli = $this->connect();

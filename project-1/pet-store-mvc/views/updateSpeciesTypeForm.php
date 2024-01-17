@@ -3,7 +3,7 @@
 
 
 
-    <label for='new_species_name'>New Species Name:</label>
+    <!-- <label for='new_species_name'>New Species Name:</label> -->
     <input type='text' name='new_species_name' placeholder='New Species Name'>
     <input type='submit'name='update_species' value='Update Specie'>
 
