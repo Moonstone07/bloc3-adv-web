@@ -15,13 +15,13 @@
         <input type="text" id="color" name="color" required>
 
         <label for="pet_breed_name">breed:</label>
-        <select name="breed_id">
+        <select name="pet_breed_id">
             <?php foreach ($breeds as $breed) : ?>
                 <option value="<?= $breed['pet_breed_id'] ?>"><?= $breed['pet_breed_name'] ?></option>
             <?php endforeach; ?>
         </select>
         <label for="pet_species_type">species:</label>
-        <select name="species_id">
+        <select name="pet_species_id">
             <?php foreach ($species as $specie) : ?>
                 <option value="<?= $specie['pet_species_id'] ?>"><?= $specie['pet_species_type'] ?></option>
             <?php endforeach; ?>
@@ -31,4 +31,3 @@
         <input type="submit" name="submit_pet" value="Submit">
     </form>
 </section>
-

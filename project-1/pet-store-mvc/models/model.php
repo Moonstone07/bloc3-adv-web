@@ -92,6 +92,7 @@ class PetModel
             FROM pets
             NATURAL JOIN pet_breed
             NATURAL JOIN pet_species
+            
             ORDER BY pets.pet_id ASC
         ";
             $result = $mysqli->query($query);
@@ -108,11 +109,11 @@ class PetModel
 
 
     // insert a new pet into the database
-    public function insertPet($pet_name, $pet_gender, $pet_age, $pet_color, $breed_id, $species_id)
+    public function insertPet($pet_name, $pet_gender, $pet_age, $pet_color, $pet_breed_id, $pet_species_id)
     {
         $mysqli = $this->connect();
         if ($mysqli) {
-            $sql = "INSERT INTO pets (pet_name, pet_gender, pet_age, pet_color, breed_id, species_id) VALUES ('$pet_name', '$pet_gender', $pet_age, '$pet_color', $breed_id, $species_id)";
+            $sql = "INSERT INTO pets (pet_name, pet_gender, pet_age, pet_color, pet_breed_id, pet_species_id) VALUES ('$pet_name', '$pet_gender', $pet_age, '$pet_color', $pet_breed_id, $pet_species_id)";
             if ($mysqli->query($sql) === TRUE) {
                 $mysqli->close();
                 return true;
